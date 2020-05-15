@@ -11,7 +11,7 @@ export default () => {
         <React.Fragment>
             <GlobalStyles />
             <Router>
-                <Routes isLoggedIn={true} />
+                <Routes isLoggedIn={false} />
             </Router>
         </React.Fragment>
     </ThemeProvider>
