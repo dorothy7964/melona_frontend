@@ -9,6 +9,7 @@ import GlobalStyles from '../Styles/GlobalStyles';
 import Theme from "../Styles/Theme";
 import Routes from "./Routes";
 import Footer from "./Footer";
+import Header from "./Header";
 
 const QUERY = gql`
     {
@@ -17,27 +18,29 @@ const QUERY = gql`
 `;
 
 const Wrapper = styled.div`
-    max-width: ${props => props.theme.maxWidthLarge};
     margin: 0 auto;
+    max-width: ${props => props.theme.maxWidthLarge};
     width: 100%;
 `;
-
 
 export default () => {
     const {
         data: { isLoggedIn }
     } = useQuery(QUERY);
 
-	return (
+    return (
         <ThemeProvider theme={Theme}>
             <React.Fragment>
                 <GlobalStyles />
-                <Wrapper>
-                    <Router>
-                        <Routes isLoggedIn={isLoggedIn} />
-                        <Footer />
-                    </Router>
-                </Wrapper>
+                <Router>
+                    <React.Fragment>
+                        {isLoggedIn && <Header />}
+                        <Wrapper>
+                            <Routes isLoggedIn={isLoggedIn} />
+                            <Footer />
+                        </Wrapper>
+                    </React.Fragment>
+                </Router>
                 <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
             </React.Fragment>
         </ThemeProvider>
