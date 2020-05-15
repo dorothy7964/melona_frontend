@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useQuery, useMutation } from "react-apollo-hooks";
+import { useQuery, useMutation } from '@apollo/client';
 import ChatPresenter from "./ChatPresenter";
 import useInput from "@am-hooks/use-input";
 import { 
@@ -11,7 +11,7 @@ import {
 
 export default ({ history }) => {
     const search = useInput("");
-    const { data, loading, refetch } = useQuery(CHATROOMS_QUERY);
+    const { data, loading, refetch, subscribeToMore } = useQuery(CHATROOMS_QUERY);
     const [createChatRoomMutaion] = useMutation(CREATE_CHATROOM);
     const [deleteChatRoomMutaion] = useMutation(DELETE_CHATROOM);
     const [readcountMsgMutation] = useMutation(READCOUNT_MESSAGE);
@@ -80,6 +80,8 @@ export default ({ history }) => {
         <ChatPresenter
             data={data}
             loading={loading}
+            refetch={refetch}
+            subscribeToMore={subscribeToMore}
             searchTerm={search}
             onSubmit={onSearchSubmit}
             handleEnterRoom={handleEnterRoom}

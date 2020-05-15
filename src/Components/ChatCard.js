@@ -5,7 +5,7 @@ import Avatar from "./Avatar";
 import FatText from './FatText';
 import TimeIapse from "./TimeIapse";
 import { DeleteCircle } from "./Icons";
-// import { NEW_MESSAGE } from "../Routes/ChatRoom/ChatRoomQueries"
+import { NEW_MESSAGE } from "../Routes/ChatRoom/ChatRoomQueries"
 
 const Card = styled.button`
     color: inherit;
@@ -97,6 +97,8 @@ const ChatCard = ({
     lastMessage,
     lastMsgTime, 
     me,
+    refetch,
+    subscribeToMore,
     handleEnterRoom,
     handleDeleteRoom,
 }) => {
@@ -104,19 +106,19 @@ const ChatCard = ({
     const avatar = participants[0].avatar;
     const userName = participants[0].userName;
 
-    // const more = () => subscribeToMore({
-    //     document: NEW_MESSAGE,
-    //     variables: {
-    //         chatRoomId
-    //     },
-    //     updateQuery: () => {
-    //         refetch();
-    //     }
-    // });
+    const more = () => subscribeToMore({
+        document: NEW_MESSAGE,
+        variables: {
+            chatRoomId
+        },
+        updateQuery: () => {
+            refetch();
+        }
+    });
 
-    // useEffect(() => {
-    //     more();
-    // }, []);
+    useEffect(() => {
+        more();
+    }, []);
     
     return (
         <Card>
@@ -155,7 +157,11 @@ ChatCard.propTypes = {
     lastMsgTime: PropTypes.string,
     me: PropTypes.shape({
         id: PropTypes.string.isRequired,
-    }).isRequired
+    }).isRequired,
+    refetch: PropTypes.func.isRequired,
+    subscribeToMore: PropTypes.func.isRequired,
+    handleEnterRoom: PropTypes.func.isRequired,
+    handleDeleteRoom: PropTypes.func.isRequired,
 };
 
 export default ChatCard;

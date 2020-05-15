@@ -43,6 +43,8 @@ const SearchInput = styled(Input)`
 export default ({
     data,
     loading, 
+    refetch,
+    subscribeToMore,
     searchTerm,
     onSubmit,
     handleEnterRoom,
@@ -83,6 +85,8 @@ export default ({
                             lastMessage={chatRoom.lastMessage}
                             lastMsgTime={chatRoom.lastMsgTime}
                             unReadMsgCounter={chatRoom.unReadMsgCounter}
+                            refetch={refetch}
+                            subscribeToMore={subscribeToMore}
                             handleEnterRoom={handleEnterRoom}
                             handleDeleteRoom={handleDeleteRoom}
                             me={data.me}
