@@ -78,15 +78,15 @@ export default (() => {
         <Header>
             <HeaderWrapper>
                 <HeaderColumn>
-                    <FontLogoLink to="/#">
+                    <FontLogoLink to="/daddy">
                         <img alt="font_logo" src={font_logo} />
                     </FontLogoLink>
                 </HeaderColumn>
                 <HeaderColumn>
-                    <HeaderLink to="/#">
+                    <HeaderLink to="/buy">
                         <img alt="buy" src={buy} />
                     </HeaderLink>
-                    <HeaderLink to="/#">
+                    <HeaderLink to="/apply">
                         <img alt="apply" src={apply} />
                     </HeaderLink>
                     {!(data && data.me)? (
@@ -94,7 +94,7 @@ export default (() => {
                             <img alt="profile" src={profile} />
                         </HeaderLink>
                     ) : (
-                        <HeaderLink to={`/#`}>
+                        <HeaderLink to={`/${data.me.userName}`}>
                             <img alt="profile" src={profile} />
                         </HeaderLink>
                     )} 
