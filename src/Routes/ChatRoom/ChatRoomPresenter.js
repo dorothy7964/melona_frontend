@@ -48,6 +48,7 @@ const CardLink = styled(Link)`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    height: 20px;
 `;
 
 const ChatContents = styled.div`

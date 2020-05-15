@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-import { useQuery, useMutation } from "react-apollo-hooks";
+import { useQuery, useMutation } from '@apollo/client';
 import { 
     CHATROOMS_QUERY, 
     SEE_CHATROOM, 
     DELETE_CHATROOM,
     SEND_MESSAGE, 
+    NEW_MESSAGE,
     READCOUNT_MESSAGE
 } from "./ChatRoomQueries";
 import ChatRoomPresenter from "./ChatRoomPresenter";
@@ -16,7 +17,7 @@ export default ({ match: { params: { chatRoomId } }, history}) => {
     const chatLocation = useRef(null);
     const [sendLoading, setSendLoading] = useState(false);
     const [deleteRoomMutaion] = useMutation(DELETE_CHATROOM);
-    const { data, loading } = useQuery(SEE_CHATROOM, {
+    const { data, loading, subscribeToMore } = useQuery(SEE_CHATROOM, {
         variables: {
             id: chatRoomId
         }
@@ -42,6 +43,27 @@ export default ({ match: { params: { chatRoomId } }, history}) => {
         }],
         variables: {
             chatRoomId
+        }
+    });
+    const more = () => subscribeToMore({
+        document: NEW_MESSAGE,
+        variables: {
+            chatRoomId
+        },
+        updateQuery: (prev, { subscriptionData }) => {
+            console.log(prev)
+            if (!subscriptionData.data) return prev;
+            const newMessage = subscriptionData.data.newMessage;
+            readcountMsgMutation();
+            if (!prev.seeChatRoom.messages.find((msg) => msg.id === newMessage.id)) {
+                return Object.assign({}, prev, {
+                    seeChatRoom: Object.assign({}, prev.seeChatRoom, {
+                        messages: [...prev.seeChatRoom.messages, newMessage],
+                    })
+                });
+            } else {
+                return prev;
+            }
         }
     });
 
@@ -99,6 +121,10 @@ export default ({ match: { params: { chatRoomId } }, history}) => {
             block: 'end', behavior: 'smooth' 
         });
     };
+
+    useEffect(() => {
+        more();
+    }, []);
 
     useEffect(()=>{
         if (!loading) {
