@@ -72,7 +72,7 @@ export default ({ history, match: { params: { userName} } }) => {
 
     const url = process.env.NODE_ENV === "development"
         ? "http://localhost:4000"
-        : "https://melona-backend.herokuapp.com/"
+        : "https://melona-backend.herokuapp.com"
 
     const handleChange = async (e) => {
         const file = e.target.files[0];
