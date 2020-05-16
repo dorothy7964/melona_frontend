@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import { FadeLoader } from "react-spinners";
+import { css } from "@emotion/core";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
 import Input from "../../Components/Input";
 import ButtonSquare from "../../Components/ButtonSquare";
+import { PlusOutline } from "../../Components/Icons";
 import useInput from "@am-hooks/use-input";
 
 const Wrapper = styled.div`
@@ -20,9 +23,42 @@ const Header = styled.header`
     align-items: center;
     margin-bottom: 30px;
     span {
-        margin-left: 10px;
-        font-size: 18pt;
+        margin-left: 15px;
+        font-size: 23pt;
+        width: 346px;
+        word-wrap: break-word;
     }
+`;
+
+const AvatarBox = styled.div`
+    position: relative;
+`;
+
+const ProfileUpload = styled.label`
+    position: absolute;
+    right: -8px;
+    bottom: 2px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    svg {
+        color: ${props => props.theme.darkGreyColor};
+    }
+`;
+
+const override = css`
+    position: absolute;
+    top: 45%;
+    left: 47%;
+`;
+
+const HiddenInput = styled.input`
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
 `;
 
 const Text = styled.div``;
@@ -63,8 +99,9 @@ const Form = styled(Box)`
 export default ({ 
     data,
     loading,
-    pwText,
-    handleConfirm
+    fileLoading,
+    handleConfirm,
+    handleChange
 }) => {
     if (loading === true){
         return (
@@ -86,7 +123,26 @@ export default ({
                 </Helmet>
                 <Form>
                     <Header>
-                        <Avatar size="md" url={getUser.avatar} />
+                        <AvatarBox>
+                            <Avatar size="lg" url={getUser.avatar} />
+                            <ProfileUpload htmlFor="fileElem">
+                                <PlusOutline size="large" />
+                            </ProfileUpload>
+                            {fileLoading && 
+                                <FadeLoader
+                                    css={override}
+                                    size={35}
+                                    color={"#003569"}
+                                />
+                            }
+                            <HiddenInput 
+                                type="file" 
+                                id="fileElem" 
+                                accept="image/*" 
+                                onChange={handleChange} 
+                                multiple
+                            />
+                        </AvatarBox>
                         <FatText text={getUser.userName} />
                     </Header>
                     <form>

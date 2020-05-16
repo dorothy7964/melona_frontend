@@ -16,7 +16,7 @@ const httpLink = new createHttpLink({
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
     uri: process.env.NODE_ENV === "development"
-				? "ws://localhost:4000"
+        ? "ws://localhost:4000"
         : "wss://melona-backend.herokuapp.com/",
     options: {
         reconnect: true

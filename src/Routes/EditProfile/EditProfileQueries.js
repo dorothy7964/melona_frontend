@@ -38,3 +38,13 @@ export const EDIT_PASSWORD = gql`
         editPassword (password: $password)
     }
 `;
+
+export const EDIT_AVATAR = gql`
+    mutation editAvatar(
+        $avatar: String
+    ) {
+        editAvatar( avatar: $avatar ){
+            avatar
+        }
+    }
+`;
