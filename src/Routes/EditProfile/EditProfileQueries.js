@@ -40,9 +40,7 @@ export const EDIT_PASSWORD = gql`
 `;
 
 export const EDIT_AVATAR = gql`
-    mutation editAvatar(
-        $avatar: String
-    ) {
+    mutation editAvatar($avatar: String!) {
         editAvatar( avatar: $avatar ){
             avatar
         }

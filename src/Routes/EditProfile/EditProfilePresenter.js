@@ -132,7 +132,7 @@ export default ({
                                 <FadeLoader
                                     css={override}
                                     size={35}
-                                    color={"#003569"}
+                                    color={"#9ccc65"}
                                 />
                             }
                             <HiddenInput 
