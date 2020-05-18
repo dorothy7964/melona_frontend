@@ -73,39 +73,39 @@ const TextFields = ({
     } else if (action === "StandardMultiline") {
         return (
             <ThemeProvider theme={defaultMaterialTheme}>
-            <TextField
-                label={text}
-                value={inputText} 
-                onChange={handleChange}
-                onKeyPress={onKeyPress}
-                placeholder={placeholder}
-                disabled={disabled}
-                multiline
-            />
+                <TextField
+                    label={text}
+                    value={inputText} 
+                    onChange={handleChange}
+                    onKeyPress={onKeyPress}
+                    placeholder={placeholder}
+                    disabled={disabled}
+                    multiline
+                />
             </ThemeProvider>
         );
     } else if (action === "StandardMultilineFull") {
         return (
             <ThemeProvider theme={defaultMaterialTheme}>
-            <TextField
-                label={text}
-                value={inputText} 
-                onChange={handleChange}
-                placeholder={placeholder}
-                multiline
-                fullWidth
-            />
+                <TextField
+                    label={text}
+                    value={inputText} 
+                    onChange={handleChange}
+                    placeholder={placeholder}
+                    multiline
+                    fullWidth
+                />
             </ThemeProvider>
         )
     } else if (action === "outline") {
         return (
             <ThemeProvider theme={defaultMaterialTheme}>
                 <TextField 
-                label={text} 
-                value={inputText} 
-                onChange={handleChange} 
-                variant="outlined" 
-            />
+                    label={text} 
+                    value={inputText} 
+                    onChange={handleChange} 
+                    variant="outlined" 
+                />
             </ThemeProvider>
         );
     } else if (action === "outlinePassword") {

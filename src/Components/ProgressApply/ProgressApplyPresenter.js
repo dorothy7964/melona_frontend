@@ -57,6 +57,7 @@ export default ({
                                     <Steppers 
                                         contentId={contents.id}
                                         stepNum={contents.confirmProgress}
+                                        confirmFile={contents.confirmFile}
                                         anotherPage={false}
                                     />
                                 </StepBox>
@@ -78,6 +79,3 @@ export default ({
         );
     }
 };
-
-
-

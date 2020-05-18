@@ -5,3 +5,11 @@ export const PROGRESS_NUM = gql`
         progressNum (contentId: $contentId, stepNum: $stepNum, anotherPage: $anotherPage)
     }
 `;
+
+export const EDIT_CONFIRMFILE = gql`
+    mutation editConfirmFile ($contentId: String! $confirmFile: String!) {
+        editConfirmFile (contentId: $contentId, confirmFile: $confirmFile) {
+            confirmFile
+        }
+    }
+`;

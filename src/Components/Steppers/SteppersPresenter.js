@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from "styled-components";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { lightGreen } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -16,6 +17,14 @@ import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import UploadPhoto from "../UploadPhoto";
+
+const ConfirmFileBox = styled.div`
+    background-image: url(${props => props.progressFile});
+    background-size: cover;
+    display: flex;
+    width: 200px;
+    height: 200px;
+`;
 
 const QontoConnector = withStyles({
     alternativeLabel: {
@@ -172,6 +181,7 @@ const getStepContent = (step) => {
 };
 
 export default ({ 
+    progressFile,
     activeStep,
     skipped,
     isStepOptional,
@@ -221,14 +231,16 @@ export default ({
                                             handleUpload={handleUpload}
                                         />
                                     </Button>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={handleSkip}
-                                        className={classes.button}
-                                    >
-                                        넘어가기
-                                    </Button>
+                                    {progressFile === "" &&
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleSkip}
+                                            className={classes.button}
+                                        >
+                                            넘어가기
+                                        </Button>
+                                    }
                                 </React.Fragment>
                             )}
                             <Button
@@ -239,6 +251,9 @@ export default ({
                             >
                                 {activeStep === steps.length - 1 ? '완료' : '다음'}
                             </Button>
+                            {progressFile && activeStep === 1 &&
+                                <ConfirmFileBox progressFile={progressFile} />
+                            }
                         </div>
                     </ThemeProvider>
                 )}
