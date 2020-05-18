@@ -17,7 +17,20 @@ export default ({ history, match: { params: { postId } } }) => {
     const [routeChatRoomMutation] = useMutation(ROUTE_CHATROOM);
     const [createChatRoomMutation] = useMutation(CREATE_CHATROOM);
 
+    // 진행완료 팝업
+    const [open, setOpen] = useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+        setView("post");
+    };
+
     const handleAction = (userName, view) => {
+        if (view === "popup"){
+            handleClickOpen();
+        }
         setViewUser(userName);
         setView(view);
     };
@@ -70,7 +83,9 @@ export default ({ history, match: { params: { postId } } }) => {
             viewUser={viewUser}
             data={data}
             loading={loading}
-            postId={postId}
+            open={open}
+            handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
             handleAction={handleAction}
             handleProgressApply={handleProgressApply}
             handleChat={handleChat}

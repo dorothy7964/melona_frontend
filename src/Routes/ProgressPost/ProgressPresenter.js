@@ -6,6 +6,7 @@ import CardUser from "./CardUser";
 import Loader from "../../Components/Loader";
 import ReplayLink from "../../Components/ReplayLink";
 import UserCard from "../../Components/UserCard";
+import ProgressFile from "../../Components/ProgressFile";
 import { Back }  from "../../Components/Icons";
 import Daddy_Success from "../../Icons/melona_success.png";
 import Daddy_Failure from "../../Icons/melona_failure.png";
@@ -39,6 +40,9 @@ export default ({
     viewUser,
     data, 
     loading, 
+    open,
+    handleClickOpen,
+    handleClose,
     handleAction,
     handleProgressApply,
     handleChat
@@ -128,6 +132,15 @@ export default ({
                             categorys={categorys}
                             anotherPage={anotherPage}
                             handleProgressApply={handleProgressApply}
+                        />
+                    )}
+                    {view === "popup" && (
+                        <ProgressFile
+                            open={open}
+                            handleClose={handleClose}
+                            categorys={categorys}
+                            userName={viewUser}
+                            anotherPage={anotherPage}
                         />
                     )}
                 </UserContainer>

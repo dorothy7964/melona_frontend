@@ -66,7 +66,7 @@ export default ({
     success, 
     failure, 
     handleAction,
-    handleChat
+    handleChat,
 }) => {
     return ( 
         <Section>
@@ -83,7 +83,12 @@ export default ({
                         </SendBox>
                     </Header>
                     {apply.progress 
-                        ?   <IconBox>
+                        ?    <IconBox onClick={
+                                () => handleAction(
+                                    apply.user.userName,
+                                    "popup"
+                                )}
+                            >
                                 <img alt="success" src={success} />
                             </IconBox>
                         :   <IconBox onClick={
