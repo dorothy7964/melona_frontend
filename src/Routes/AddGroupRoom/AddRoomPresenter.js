@@ -19,10 +19,10 @@ const Box = styled.div`
 
 const Form = styled(Box)`
    padding: 40px;
-   form {
+    form {
         display: flex;
         flex-direction: column;
-   }
+    }
 `;
 
 const Section = styled.div`
@@ -103,7 +103,6 @@ const UploadBox = styled.div`
     }
 `;
 
-
 const ListContainer = styled(Section)`
     width: 100%;
 `;
@@ -174,7 +173,6 @@ export default ({
                     <UploadBox>
                         <UploadPhoto 
                             handleUpload={handleUpload}
-
                         />
                     </UploadBox>
                 </CoverImgContainer>

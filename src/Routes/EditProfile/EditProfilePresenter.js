@@ -35,6 +35,9 @@ const AvatarBox = styled.div`
 `;
 
 const ProfileUpload = styled.label`
+    @media (max-width: ${props => props.theme.maxWidthSmall}){
+        display: none;
+    }
     position: absolute;
     right: -8px;
     bottom: 2px;

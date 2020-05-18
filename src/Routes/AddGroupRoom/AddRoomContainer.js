@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo-hooks";
+import axios from "axios";
 import AddRoomPresenter from "./AddRoomPresenter";
 import { CREATE_GROUPROOM, SEE_FOLLOWING } from "./AddRoomQueries";
 
@@ -18,22 +19,33 @@ export default ({ history, match: { params: { userName } }}) => {
         setRoomName(e.target.value);
     };
     
+    const url = process.env.NODE_ENV === "development"
+        ? "http://localhost:4000"
+        : "https://melona-backend.herokuapp.com"
+
     // 커버 이미지
     const handleUpload = async(e) => {
         const file = e.target.files[0];
-        setCoverPhoto(file.name);
+        const formData = new FormData();
+        formData.append("file", file);
+        try {
+            const {
+                data: { location }
+            } = await axios.post(`${url}/api/upload`, formData, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Access-Control-Allow-Origin": "*"
+                }
+            });
+            setCoverPhoto(location);
+        } catch (e) {
+            toast.error("업로드 실패하였습니다.");
+        }
     };
 
     // Mutation
     const handleConfirm = async() => {
-        if (coverPhoto === "") {
-            await createGroupRoomMutation({
-                variables: {
-                    roomName, 
-                    userName: right
-                }
-            });
-        } else {
+        try {
             await createGroupRoomMutation({
                 variables: {
                     coverPhoto, 
@@ -41,6 +53,8 @@ export default ({ history, match: { params: { userName } }}) => {
                     userName: right
                 }
             });
+        } catch (e) {
+            toast.error("업로드 실패하였습니다.");
         }
         toast.success("완료 되었습니다.");
         history.push(`/${userName}`);
