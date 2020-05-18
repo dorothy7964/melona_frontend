@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { FadeLoader } from "react-spinners";
+import { css } from "@emotion/core";
 import { lightGreen } from '@material-ui/core/colors';
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -14,7 +16,7 @@ import ProgressDialogs from "../../Components/ProgressDialogs";
 import TransferListDialogsAdd from "../../Components/TransferListDialogsAdd";
 import TransferListDialogsDel from "../../Components/TransferListDialogsDel";
 import GroupDaughter from "../GroupDaughter";
-import { Back } from "../../Components/Icons";
+import { Back, PlusOutline } from "../../Components/Icons";
 
 const defaultMaterialTheme  = createMuiTheme({
     palette: {
@@ -52,13 +54,44 @@ const CoverWrapper = styled.div`
 `;
 
 const AvatarBox = styled.div`
+    position: relative;
     div {
         @media (max-width: ${props => props.theme.maxWidthMiddle}){
             display: none;   
         }
     }
 `;
-        
+
+const ProfileUpload = styled.label`
+    @media (max-width: ${props => props.theme.maxWidthMiddle}){
+        display: none;
+    }
+    position: absolute;
+    right: -8px;
+    bottom: 2px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    svg {
+        color: ${props => props.theme.darkGreyColor};
+    }
+`;
+
+const override = css`
+    position: absolute;
+    top: 45%;
+    left: 47%;
+`;
+
+const HiddenInput = styled.input`
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+`;      
+      
 const CoverContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -115,6 +148,7 @@ const DialogBox = styled.div`
 export default ({ 
     data,
     loading,
+    fileLoading,
     groupRoomId,
     progressOpen,
     formOpen,
@@ -137,6 +171,7 @@ export default ({
     handleClickOpenMemberDel,
     handleCloseMemberDel,
     handleAddMemberDel,
+    handleCoverPhoto
 }) => {
     if (loading === true){
         return (
@@ -169,6 +204,23 @@ export default ({
                     <Section>
                         <AvatarBox>
                             <Avatar size="lg" url={seeGroupRoom.coverPhoto} />
+                            <ProfileUpload htmlFor="fileElem">
+                                <PlusOutline size="large" />
+                            </ProfileUpload>
+                            {fileLoading && 
+                                <FadeLoader
+                                    css={override}
+                                    size={35}
+                                    color={"#9ccc65"}
+                                />
+                            }
+                            <HiddenInput 
+                                type="file" 
+                                id="fileElem" 
+                                accept="image/*" 
+                                onChange={handleCoverPhoto} 
+                                multiple
+                            />
                         </AvatarBox>
                         <CoverContainer>
                             <CoverBox>
@@ -249,6 +301,3 @@ export default ({
         );
     }
 };
-
-
-     

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import GroupRoomMePresenter from "./GroupRoomMePresenter";
 import { 
@@ -10,9 +11,15 @@ import {
 } from "../GroupRoom/GroupRoomQueries";
 
 export default ({ match: { params: { groupRoomId } }}) => {
-    const [editGroupRoomMutation] = useMutation(EDIT_GROUPROOM);
+    const [fileLoading, setFileLoading] = useState(false);
     const [addUserMemberMutation] = useMutation(ADD_MEMBER);
     const [deleteUserMemberMutation] = useMutation(DELETE_MEMBER);
+    const [editGroupRoomMutation] = useMutation(EDIT_GROUPROOM,  {
+        refetchQueries: () => [{
+            query: SEE_GROUPROOM,
+            variables: { groupRoomId }
+        }]
+    });
     const { data, loading, refetch } = useQuery(SEE_GROUPROOM, {
         variables: { groupRoomId }
     });
@@ -109,6 +116,44 @@ export default ({ match: { params: { groupRoomId } }}) => {
         refetch();
     };
 
+    // coverPhoto 편집
+    const url = process.env.NODE_ENV === "development"
+        ? "http://localhost:4000"
+        : "https://melona-backend.herokuapp.com"
+
+    const handleCoverPhoto = async(e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            setFileLoading(true);
+            const {
+                data: { location }
+            } = await axios.post(`${url}/api/upload`, formData, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Access-Control-Allow-Origin": "*"
+                }
+            });
+            const {
+                data: { editGroupRoom }
+            } = await editGroupRoomMutation({
+                variables: {
+                    groupRoomId,
+                    coverPhoto: location
+                }
+            });
+            if (editGroupRoom){
+                toast.success("커버 사진이 변경 되었습니다.")
+            }
+        } catch (e) {
+            toast.error("업로드 실패하였습니다.");
+        } finally {
+            setFileLoading(false);
+        }
+    };
+
     useEffect(() => {
         refetch();
     }, []);
@@ -117,6 +162,7 @@ export default ({ match: { params: { groupRoomId } }}) => {
         <GroupRoomMePresenter 
             data={data}
             loading={loading}
+            fileLoading={fileLoading}
             groupRoomId={groupRoomId}
             progressOpen={progressOpen}
             formOpen={formOpen}
@@ -139,6 +185,7 @@ export default ({ match: { params: { groupRoomId } }}) => {
             handleClickOpenMemberDel={handleClickOpenMemberDel}
             handleCloseMemberDel={handleCloseMemberDel}
             handleAddMemberDel={handleAddMemberDel}
+            handleCoverPhoto={handleCoverPhoto}
         />
     );
 };
