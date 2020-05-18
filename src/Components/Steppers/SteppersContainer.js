@@ -115,18 +115,37 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
             }
         });
     };
+
+    const handleReset = async() => {
+        setProgressFile("");
+        try {
+            const {
+                data: { editConfirmFile }
+            } = await editConfirmFileMutation({
+                variables: {
+                    contentId,
+                    confirmFile: ""
+                }
+            });
+            if (editConfirmFile){
+                toast.success("인증 사진이 취소 되었습니다.")
+            }
+        } catch (e) {
+            toast.error("업로드 실패하였습니다.");
+        }
+    };
   
     return (
         <SteppersPresenter
             progressFile={progressFile}
             activeStep={activeStep}
-            skipped={skipped}
             isStepOptional={isStepOptional}
             isStepSkipped={isStepSkipped}
             handleNext={handleNext}
             handleBack={handleBack}
             handleUpload={handleUpload}
             handleSkip={handleSkip}
+            handleReset={handleReset}
         />
     );
 };

@@ -183,13 +183,13 @@ const getStepContent = (step) => {
 export default ({ 
     progressFile,
     activeStep,
-    skipped,
     isStepOptional,
     isStepSkipped,
     handleNext,
     handleBack,
     handleUpload,
     handleSkip,
+    handleReset
 }) => {
     const classes = useStyles();
     const steps = getSteps();
@@ -231,15 +231,23 @@ export default ({
                                             handleUpload={handleUpload}
                                         />
                                     </Button>
-                                    {progressFile === "" &&
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={handleSkip}
-                                            className={classes.button}
-                                        >
-                                            넘어가기
-                                        </Button>
+                                    {progressFile === null || progressFile === "" 
+                                        ?   <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={handleSkip}
+                                                className={classes.button}
+                                            >
+                                                넘어가기
+                                            </Button>
+                                        :   <Button
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={handleReset}
+                                                className={classes.button}
+                                            >
+                                                인증 사진 취소
+                                            </Button>
                                     }
                                 </React.Fragment>
                             )}

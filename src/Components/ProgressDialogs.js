@@ -41,11 +41,11 @@ export default ({
 }) => (
     <ThemeProvider theme={defaultMaterialTheme}>
         <Button variant="outlined" color="primary" onClick={handleClickOpenProgress}>
-            진헹 상황 보기
+            진행 상황 보기
         </Button>
         <Dialog open={progressOpen} onClose={handleCloseProgress} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">
-                진헹 상황 보기
+                진행 상황 보기
             </DialogTitle>
             <DialogContent>
                 <ContentLink to={`/buyGroup/${groupRoomId}`}>
