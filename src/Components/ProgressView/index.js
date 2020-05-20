@@ -1,2 +1,2 @@
-import ProgressBoxContainer from "./ProgressBoxContainer";
-export default ProgressBoxContainer;
+import ProgressViewContainer from "./ProgressViewContainer";
+export default ProgressViewContainer;
