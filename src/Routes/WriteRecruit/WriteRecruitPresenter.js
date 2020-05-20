@@ -111,6 +111,9 @@ export default ({
                         </Section>
                         <Section>
                             <Text>지역을 선택해 주세요.</Text>
+                            <GoogleMaps 
+                                route="writeRecruit"
+                            />
                         </Section>
                         <Section>
                             <Text style={{ marginBottom: "34px" }}>도착일을 선택해 주세요.</Text>
