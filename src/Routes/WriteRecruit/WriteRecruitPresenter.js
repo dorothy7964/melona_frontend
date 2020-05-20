@@ -93,40 +93,7 @@ export default ({
         </Helmet>
         {action === "view" && (
             <React.Fragment>
-                <ReplayLink to="/daddy">
-                    <Back />
-                </ReplayLink>
-                <Form>
-                    <HeaderIcon>
-                        <img alt="daddyBody" src={daddyBody} />
-                    </HeaderIcon>
-                    <form>
-                        <Section>
-                            <Text>가능한 카테고리를 체크 해주세요.</Text>
-                            <CheckboxArr
-                                checkbox={checkbox}
-                                categoryArray={categoryArray}
-                                handleCheckbox={handleCheckbox} 
-                            />
-                        </Section>
-                        <Section>
-                            <Text>지역을 선택해 주세요.</Text>
-                            <GoogleMaps 
-                                route="writeRecruit"
-                            />
-                        </Section>
-                        <Section>
-                            <Text style={{ marginBottom: "34px" }}>도착일을 선택해 주세요.</Text>
-                            <DatePicker 
-                                selectedDate={selectedDate}
-                                handleDateChange={handleDateChange}
-                            />
-                        </Section>
-                    </form>
-                    <Buttons>
-                        <ButtonSquare onClick={handleConfirm} text="작성 하기" />
-                    </Buttons>
-                </Form>
+               hi
             </React.Fragment>
         )}
         {action === "feed" && (
