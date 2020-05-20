@@ -1,2 +1,2 @@
-import StapContainer from "./StapContainer";
-export default StapContainer;
+import ProgressStapContainer from "./ProgressStapContainer";
+export default ProgressStapContainer;

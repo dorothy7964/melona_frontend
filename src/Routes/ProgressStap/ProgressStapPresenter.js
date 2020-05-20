@@ -49,7 +49,8 @@ export default ({ data, loading, handleProgressApply }) => {
                 location,
                 lastDate,
                 categorys,
-                anotherPage
+                anotherPage,
+                groupRoom
             } 
         } = data;
 
@@ -68,13 +69,22 @@ export default ({ data, loading, handleProgressApply }) => {
                     lastDate={lastDate}
                 />
                 <ReplayButton>
-                    {!anotherPage
-                        ?   <Link to="/buy">
-                                <Back />
-                            </Link>
-                        :   <Link to="/apply">
-                                <Back />
-                            </Link>
+                    {groupRoom === "none"
+                        ?   !anotherPage
+                              ?   <Link to="/buy">
+                                    <Back />
+                                  </Link>
+                              :   <Link to="/apply">
+                                    <Back />
+                                  </Link>
+                        :   !anotherPage
+                              ?   <Link to={`/groupRoom/${groupRoom}`}>
+                                    <Back />
+                                  </Link>
+                              :   <Link to={`/groupRoomMe/${groupRoom}`}>
+                                    <Back />
+                                  </Link>
+                        
                     }                
                 </ReplayButton>
                 <ApplyUserBox>

@@ -44,6 +44,7 @@ const WriteApplyPresenter = ({
                 lastDate,
                 categorys,
                 anotherPage,
+                groupRoom
             } 
         } = data;
         
@@ -84,10 +85,13 @@ const WriteApplyPresenter = ({
                     </React.Fragment>
                 )}
                 {action === "feed" && (
-                    !anotherPage
-                        ?   <Redirect to="/daddy" />
-                        :   <Redirect to="/daughter" />
-                    
+                    groupRoom === "none" 
+                        ?   !anotherPage
+                              ?   <Redirect to="/daddy" />
+                              :   <Redirect to="/daughter" />
+                        :   !anotherPage
+                              ?   <Redirect to={`/groupRoom/${groupRoom}`} />
+                              :   <Redirect to={`/groupRoomMe/${groupRoom}`} />
                 )}  
             </Wrapper>
         );
