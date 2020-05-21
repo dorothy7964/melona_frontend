@@ -1,8 +1,16 @@
 import { gql } from "apollo-boost";
 
 export const TOGGLE_POSTEDRES = gql`
-    query togglePostedRes ($tab: String!) {
-        togglePostedRes (tab: $tab) {
+    query togglePostedRes (
+        $tab: String!
+        $items: Int
+        $pageNumber: Int
+        ) {
+        togglePostedRes (
+            tab: $tab
+            items: $items
+            pageNumber: $pageNumber
+        ) {
             id
             location
             lastDate
