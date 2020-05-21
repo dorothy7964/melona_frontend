@@ -98,7 +98,7 @@ export default ({
                                                 <Steppers
                                                     contentId={contentsReqs.id}
                                                     stepNum={contentsReqs.confirmProgress}
-                                                    anotherPage={true}
+                                                    anotherPage={anotherPage}
                                                 />
                                             }
                                         </div>

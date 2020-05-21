@@ -17,7 +17,6 @@ export default ({ categoryId, anotherPage }) => {
     };
     const handleClose = () => {
         setOpen(false);
-        // setView("post");
     };
 
     useEffect(() => {

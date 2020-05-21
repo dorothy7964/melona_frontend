@@ -81,9 +81,11 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
             } = await editConfirmFileMutation({
                 variables: {
                     contentId,
+                    anotherPage,
                     confirmFile: location
                 }
             });
+            
             if (editConfirmFile){
                 toast.success("업로드 되었습니다.")
             }
