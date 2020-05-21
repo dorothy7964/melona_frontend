@@ -1,8 +1,16 @@
 import { gql } from "apollo-boost";
 
 export const SEEBUYME_GROUP = gql`
-    query seeBuyMeGroup ($groupRoomId: String!) {
-        seeBuyMeGroup (groupRoomId: $groupRoomId) {
+    query seeBuyMeGroup (
+        $groupRoomId: String! 
+        $items: Int 
+        $pageNumber: Int
+    ) {
+        seeBuyMeGroup (
+            groupRoomId: $groupRoomId,
+            items: $items, 
+            pageNumber: $pageNumber
+        ) {
             id
             location
             lastDate

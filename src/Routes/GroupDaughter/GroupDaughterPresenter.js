@@ -1,6 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { css } from "@emotion/core";
+import InfiniteScroll from "react-infinite-scroll-component";
 import RouteTab from "../../Components/RouteTab";
 import SearchCategoryTab from "../../Components/SearchCategoryTab";
 import SearchTextFields from "../../Components/SearchTextFields";
@@ -8,6 +11,23 @@ import PostBox from "../../Components/PostBox";
 import Loader from "../../Components/Loader";
 import ButtonCircle from "../../Components/ButtonCircle";
 import daughter from "../../Icons/daughter.png";
+
+const ScrollableDiv = styled(InfiniteScroll)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 스크롤 숨기기 */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
+`
+const Spinners = css`
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+`;
 
 const Wrapper = styled.div`
     @media (max-width: ${props => props.theme.maxWidthLarge}){
@@ -24,6 +44,7 @@ const CategoryBox = styled.div`
 const Section = styled.div`
     display: flex;
     flex-direction: row;
+    margin-bottom: 30px;
 `;
 
 const SearchBox = styled.div`
@@ -35,17 +56,18 @@ const SearchBox = styled.div`
 
 export default ({ 
     data, 
-    loading, 
+    hasMore,
+    onLoadMore,
     refetch,
     groupRoomId
 }) => {
-    if (loading === true){
+    if (!data){
         return (
             <Wrapper>
                 <Loader />
             </Wrapper>
         );
-    } else if (!loading && data && data.seeBuyMeGroup) {
+    } else if (data && data.seeBuyMeGroup) {
         const { seeBuyMeGroup } = data;
         return (
             <Wrapper>
@@ -65,11 +87,22 @@ export default ({
                         <ButtonCircle type="plus" />
                     </Link>
                 </Section>
-                <PostBox 
-                    data={seeBuyMeGroup}
-                    iconImg={daughter}
-                    refetch={refetch}
-                />
+                <ScrollableDiv
+                    dataLength={seeBuyMeGroup.length}
+                    next={onLoadMore}
+                    hasMore={hasMore}
+                    loader={<ClipLoader
+                        css={Spinners}
+                        size={35}
+                        color={"#c7c7c7"}
+                    />}
+                >
+                    <PostBox 
+                        data={seeBuyMeGroup}
+                        iconImg={daughter}
+                        refetch={refetch}
+                    />
+                </ScrollableDiv>
             </Wrapper>
         );
     }

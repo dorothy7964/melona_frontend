@@ -1,23 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import GroupDaughterPresenter from "./GroupDaughterPresenter";
 import { SEEBUYME_GROUP } from "./GroupDaughterQueries";
 
 export default ({ groupRoomId }) => {
-    const { data, loading, refetch } = useQuery(SEEBUYME_GROUP, {
+    const [hasMore, setHasMore] = useState(true);
+    const items = 4;
+    const { data, refetch, fetchMore } = useQuery(SEEBUYME_GROUP, {
         variables: {
-            groupRoomId
-        }
+            groupRoomId,
+            pageNumber: 0,
+            items
+        },
+        fetchPolicy: "cache-and-network"
     });
-
-    useEffect(() => {
-        refetch();
-    }, []);
+    
+    const onLoadMore = () => {
+        fetchMore({
+            variables: {
+                pageNumber: data.seeBuyMeGroup.length,
+                items
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) {
+                    setHasMore(false);
+                    return prev;
+                }
+                if (fetchMoreResult.seeBuyMeGroup.length < items) {
+                    setHasMore(false);
+                }
+                return Object.assign({}, prev, {
+                    seeBuyMeGroup: [...prev.seeBuyMeGroup, ...fetchMoreResult.seeBuyMeGroup]
+                });
+            }
+        })
+    }
 
     return (
         <GroupDaughterPresenter 
             data={data}
-            loading={loading}
+            hasMore={hasMore}
+            onLoadMore={onLoadMore}
             refetch={refetch}
             groupRoomId={groupRoomId}
         />
