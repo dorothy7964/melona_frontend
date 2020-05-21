@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from "react-router-dom";
 import Auth from "../Routes/Auth";
-import Feed from "../Routes/Feed";
+// import Feed from "../Routes/Feed";
 import Daddy from "../Routes/Daddy";
 import Daughter from "../Routes/Daughter";
 import Search from "../Routes/Search";
@@ -33,7 +33,7 @@ import Profile from "../Routes/Profile";
 
 const LoggedInRoutes = () => (
     <Switch>
-        <Route exact path="/" component={Feed} />
+        <Route exact path="/" component={Daddy} />
         <Route path="/daddy" component={Daddy} />
         <Route path="/daughter" component={Daughter} />
         <Route path="/search/:term" component={Search} />
