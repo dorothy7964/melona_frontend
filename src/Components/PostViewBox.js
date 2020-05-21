@@ -9,7 +9,7 @@ const ViewBox = styled(Link)`
     display: flex;
     padding: 20px;
     width: 100%;
-    border: 1px solid #b9dd39;
+    border-right: 1px solid ${props => props.theme.lightGreyColor};
     font-weight: 600;
     cursor: pointer;
     img {
@@ -43,6 +43,12 @@ const HoverText = styled.div`
     }
 `;
 
+const TextBox = styled.div`
+    background-color: ${props => props.theme.lightGreenColor};
+    border-radius: 59%;
+    padding: 0 10px;
+`;
+
 const PostViewBox = ({
     postId,
     iconImg,
@@ -60,9 +66,9 @@ const PostViewBox = ({
         );
     } else {
         return (
-            <ViewBox to={`/viewApply/${postId}`} style={{ backgroundColor: "#b9dd39" }}>
+            <ViewBox to={`/viewApply/${postId}`}>
                 <img alt="신청자 보기" src={iconImg} />
-                <div>신청자 보기</div>
+                <TextBox>신청자 보기</TextBox>
             </ViewBox>
         );
     } 
