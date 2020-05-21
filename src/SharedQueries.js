@@ -11,8 +11,8 @@ export const ME = gql`
 
 // DaddyContainer, BuyContainer, ApplyContainer
 export const SEE_BUY = gql`
-    query seeBuy {
-        seeBuy {
+    query seeBuy ($items: Int $pageNumber: Int) {
+        seeBuy (items: $items, pageNumber: $pageNumber) {
             id
             location
             lastDate

@@ -1,7 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { ClipLoader } from "react-spinners";
+import { css } from "@emotion/core";
+import InfiniteScroll from "react-infinite-scroll-component";
 import RouteTab from "../../Components/RouteTab";
 import SearchCategoryTab from "../../Components/SearchCategoryTab";
 import SearchTextFields from "../../Components/SearchTextFields";
@@ -9,6 +12,23 @@ import PostBox from "../../Components/PostBox";
 import Loader from "../../Components/Loader";
 import ButtonCircle from "../../Components/ButtonCircle";
 import daddy from "../../Icons/daddy.png";
+
+const ScrollableDiv = styled(InfiniteScroll)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 스크롤 숨기기 */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
+`
+const Spinners = css`
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+`;
 
 const Wrapper = styled.div`
     @media (max-width: ${props => props.theme.maxWidthLarge}){
@@ -25,6 +45,7 @@ const CategoryBox = styled.div`
 const Section = styled.div`
     display: flex;
     flex-direction: row;
+    margin-bottom: 30px;
 `;
 
 const SearchBox = styled.div`
@@ -36,17 +57,19 @@ const SearchBox = styled.div`
 
 export default ({ 
     data, 
-    loading, 
-    refetch
+    hasMore,
+    onLoadMore,
+    refetch,
 }) => {
-    if (loading === true || !data){
+    if (!data){
         return (
             <Wrapper>
                 <Loader />
             </Wrapper>
         );
-    } else if (!loading && data && data.seeBuy) {
+    } else if (data && data.seeBuy) {
         const { seeBuy } = data;
+        
         return (
             <Wrapper>
                 <Helmet>
@@ -64,11 +87,22 @@ export default ({
                         <ButtonCircle type="plus" />
                     </Link>
                 </Section>
-                <PostBox 
-                    data={seeBuy}
-                    iconImg={daddy}
-                    refetch={refetch}
-                />
+                <ScrollableDiv
+                    dataLength={seeBuy.length}
+                    next={onLoadMore}
+                    hasMore={hasMore}
+                    loader={<ClipLoader
+                        css={Spinners}
+                        size={35}
+                        color={"#c7c7c7"}
+                    />}
+                >
+                    <PostBox 
+                        data={seeBuy}
+                        iconImg={daddy}
+                        refetch={refetch}
+                    />
+                </ScrollableDiv>
             </Wrapper>
         );
     }
