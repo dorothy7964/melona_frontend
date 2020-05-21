@@ -4,6 +4,8 @@ import Loader from "../Loader";
 import FatText from "../FatText";
 import Steppers from "../Steppers";
 import SteppersView from "../SteppersView";
+import ButtonSquare from "../ButtonSquare";
+import ProgressFile from "../ProgressFile";
 
 const Wrapper = styled.div`
     min-height: ${props => props.theme.minHeight};
@@ -29,11 +31,23 @@ const StepBox = styled.div`
     margin-bottom: 50px;
 `;
 
+const ProgressFileBox = styled.div`
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    button {
+        font-weight: 600;
+    }
+`;
+
 export default ({ 
     data, 
     loading,
     userName,
-    anotherPage 
+    anotherPage,
+    open,
+    handleClickOpen,
+    handleClose,
 }) => {
     if (loading === true){
         return (
@@ -71,6 +85,25 @@ export default ({
                                             }
                                         </div>
                                     ))}
+                                    {contents.contentsReqs.confirmProgress !== 0 &&
+                                        <ProgressFileBox>
+                                            <ButtonSquare 
+                                                onClick={handleClickOpen}
+                                                text="인증 사진 보기"
+                                            />
+                                            <ProgressFile
+                                                open={open}
+                                                handleClose={handleClose}
+                                                categorys={[{
+                                                    id : contents.category.id,
+                                                    userName: userName,
+                                                    anotherPage: anotherPage
+                                                }]}
+                                                userName={userName}
+                                                anotherPage={anotherPage}
+                                            />
+                                        </ProgressFileBox>
+                                    }
                                 </StepBox>
                         }
                     </div>
@@ -79,3 +112,6 @@ export default ({
         );
     }
 };
+
+
+

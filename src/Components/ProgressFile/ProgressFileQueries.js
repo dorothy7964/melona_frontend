@@ -16,6 +16,7 @@ export const CATEGORY_CONTENTS = gql`
             contentsReqs {
                 id
                 confirmCheck
+                confirmFile
                 confirmProgress
                     user {
                         id

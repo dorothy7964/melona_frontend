@@ -71,7 +71,7 @@ export default ({
                                     <SteppersView 
                                         activeStep={contents.confirmProgress}
                                     />
-                                    {contents.confirmProgress === 3 &&
+                                    {contents.confirmProgress !== 0 &&
                                         <ProgressFileBox>
                                             <ButtonSquare 
                                                 onClick={handleClickOpen}

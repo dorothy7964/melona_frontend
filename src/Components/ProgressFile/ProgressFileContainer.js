@@ -30,6 +30,7 @@ const Wrapper = styled(Shadow)`
 const ConfirmFileBox = styled.div`
     img {
         width: 250px;
+        height: 100%;
         background-size: cover;
     }
 `;
@@ -86,10 +87,18 @@ export default ({
             categoryContents.map(contents => (
                 <Wrapper key={contents.id}>
                     
-                    {contents.confirmFile 
-                        ?   <ConfirmFileBox>
-                                <img alt="인증 사진" src={contents.confirmFile} />
-                            </ConfirmFileBox>
+                    {contents.confirmFile !== "none"
+                        ?   !anotherPage
+                                ?   <ConfirmFileBox>
+                                        <img alt="인증 사진" src={contents.confirmFile} />
+                                    </ConfirmFileBox>
+                                :   contents.contentsReqs.map(contentsReqs => (
+                                        <ConfirmFileBox
+                                            key={contentsReqs.id}
+                                        >
+                                            <img alt="인증 사진" src={contentsReqs.confirmFile} />
+                                        </ConfirmFileBox>
+                                    ))
                         :   <ConfirmFileBox>
                                 <img alt="인증 사진" src={confirmFileText} />
                             </ConfirmFileBox>
