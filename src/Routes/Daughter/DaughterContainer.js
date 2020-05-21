@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import DaughterPresenter from "./DaughterPresenter";
 import { SEE_BUYME } from "./DaughterQueries";
+import { items } from "../../PaginationItemNum";
 
 export default () => {
     const [hasMore, setHasMore] = useState(true);
-    const items = 4;
     const { data, refetch, fetchMore } = useQuery(SEE_BUYME, {
         variables: {
             pageNumber: 0,

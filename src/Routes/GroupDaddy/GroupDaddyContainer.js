@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import GroupDaddyPresenter from "./GroupDaddyPresenter";
 import { SEEBUY_GROUP } from "./GroupDaddyQueries";
+import { items } from "../../PaginationItemNum";
 
 export default ({ groupRoomId }) => {
     const [hasMore, setHasMore] = useState(true);
-    const items = 4;
     const { data, refetch, fetchMore } = useQuery(SEEBUY_GROUP, {
         variables: {
             groupRoomId,
