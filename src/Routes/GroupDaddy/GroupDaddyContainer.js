@@ -1,23 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import GroupDaddyPresenter from "./GroupDaddyPresenter";
 import { SEEBUY_GROUP } from "./GroupDaddyQueries";
 
 export default ({ groupRoomId }) => {
-    const { data, loading, refetch } = useQuery(SEEBUY_GROUP, {
+    const [hasMore, setHasMore] = useState(true);
+    const items = 4;
+    const { data, refetch, fetchMore } = useQuery(SEEBUY_GROUP, {
         variables: {
-            groupRoomId
-        }
+            groupRoomId,
+            pageNumber: 0,
+            items
+        },
+        fetchPolicy: "cache-and-network"
     });
-
-    useEffect(() => {
-        refetch();
-    }, []);
+    
+    const onLoadMore = () => {
+        fetchMore({
+            variables: {
+                pageNumber: data.seeBuyGroup.length,
+                items
+            },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (!fetchMoreResult) {
+                    setHasMore(false);
+                    return prev;
+                }
+                if (fetchMoreResult.seeBuyGroup.length < items) {
+                    setHasMore(false);
+                }
+                return Object.assign({}, prev, {
+                    seeBuyGroup: [...prev.seeBuyGroup, ...fetchMoreResult.seeBuyGroup]
+                });
+            }
+        })
+    }
  
     return (
         <GroupDaddyPresenter 
             data={data}
-            loading={loading}
+            hasMore={hasMore}
+            onLoadMore={onLoadMore}
             refetch={refetch}
             groupRoomId={groupRoomId}
         />
