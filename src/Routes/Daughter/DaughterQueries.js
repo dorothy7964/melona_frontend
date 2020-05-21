@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost";
 
 export const SEE_BUYME = gql`
-    query seeBuyMe {
-        seeBuyMe {
+    query seeBuyMe ($items: Int $pageNumber: Int) {
+        seeBuyMe (items: $items, pageNumber: $pageNumber) {
             id
             location
             lastDate
