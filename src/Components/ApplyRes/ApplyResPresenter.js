@@ -28,7 +28,6 @@ const Wrapper = styled.div`
 `;
 
 export default ({ 
-    tab, 
     iconImg, 
     data, 
     hasMore,

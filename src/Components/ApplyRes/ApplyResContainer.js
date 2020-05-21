@@ -37,7 +37,6 @@ export default ({ tab, iconImg }) => {
     
     return (
         <ApplyResPresenter 
-            tab={tab}        
             iconImg={iconImg}        
             data={data}
             hasMore={hasMore}
