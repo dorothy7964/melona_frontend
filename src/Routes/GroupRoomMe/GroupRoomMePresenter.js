@@ -189,6 +189,8 @@ export default ({
         participants.map(user => (
             userNameArr.push(user.userName)
         ));
+
+        let filterUser = userNameArr.filter(user => user !== userName);
         
         return (
             <Wrapper>
@@ -272,7 +274,7 @@ export default ({
                                                 handleAddMember={handleAddMember}
                                             />
                                             <TransferListDialogsDel 
-                                                userNameArr={userNameArr}
+                                                userNameArr={filterUser}
                                                 groupMemberId={seeGroupRoom.groupRoomMember[0].id}
                                                 memberOpen={memberOpenDel}
                                                 right={rightDel}
