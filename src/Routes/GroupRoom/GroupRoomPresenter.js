@@ -285,6 +285,12 @@ export default ({
                                                 seeGroupRoom.groupRoomMember[0].participants
                                             }
                                         />
+                                        <ProgressDialogs 
+                                            groupRoomId={groupRoomId}
+                                            progressOpen={progressOpen}
+                                            handleClickOpenProgress={handleClickOpenProgress}
+                                            handleCloseProgress={handleCloseProgress}
+                                        />
                                     </DialogBox>
                             }
                         </CoverContainer>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import { SEE_BUY } from "../../SharedQueries";
-import DaddyPresenter from "./DaddyPresenter";
 import { items } from "../../PaginationItemNum";
+import DaddyPresenter from "./DaddyPresenter";
 
 export default () => {
     const [hasMore, setHasMore] = useState(true);

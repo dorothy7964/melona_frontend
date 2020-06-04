@@ -51,7 +51,6 @@ export default ({ match: { params: { chatRoomId } }, history}) => {
             chatRoomId
         },
         updateQuery: (prev, { subscriptionData }) => {
-            console.log(prev)
             if (!subscriptionData.data) return prev;
             const newMessage = subscriptionData.data.newMessage;
             readcountMsgMutation();
@@ -69,14 +68,12 @@ export default ({ match: { params: { chatRoomId } }, history}) => {
 
     const onSubmit = async(e) => {
         e.preventDefault();
-        console.log("확인");
         try {
             setSendLoading(true);
             messageInput.setValue("");
             await sendMessageMutation();
             await readcountMsgMutation();
         } catch {
-            console.log(e);
             toast.error("Cant send messageInput");
         } finally {
             setSendLoading(false);
