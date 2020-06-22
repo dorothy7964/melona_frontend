@@ -44,12 +44,12 @@ export default ({ match: { params: { postId } }}) => {
 
     const handleRemove = async(postId) => {
         try {
-            deleteContentsMutation({
+            await deleteContentsMutation({
                 variables: {
                     postId
                 } 
             });
-            falseApplyMutation({
+            await falseApplyMutation({
                 variables: {
                     postId
                 }   
