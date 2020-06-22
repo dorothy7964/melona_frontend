@@ -24,9 +24,24 @@ const IconBox = styled(Link)`
     }
 `;
 
+const ButtonContainer = styled.button`
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border: 0;
+    background-color: inherit;
+    outline: none;
+    cursor: pointer;
+    svg {
+        color: ${props => props.theme.darkGreyColor};
+        font-size: 35pt;
+    }
+`;
+
 const BackRoute = ({ 
     type = "noneText",
     route,
+    onClick
 }) => {
     const [action] = useState(type);
 
@@ -45,12 +60,19 @@ const BackRoute = ({
                 link={`/${route}`}
             />
         );
+    } else if (action === "button"){
+        return (
+            <ButtonContainer onClick={onClick}>
+                <Back />
+            </ButtonContainer>
+        )
     }
 };
 
 BackRoute.propTypes = {
     type : PropTypes.string,
-    route : PropTypes.string.isRequired,
+    route : PropTypes.string,
+    onClick : PropTypes.func,
 };
 
 export default BackRoute;

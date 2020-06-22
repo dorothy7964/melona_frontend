@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-apollo-hooks";
 import { SEE_BUY } from "../../SharedQueries";
 import { items } from "../../PaginationItemNum";
@@ -34,6 +34,10 @@ export default () => {
             }
         })
     }
+
+    useEffect(() => {
+        refetch();
+    }, []);
  
     return (
         <DaddyPresenter 

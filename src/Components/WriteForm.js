@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import PlusText from "./PlusText";
@@ -44,16 +45,25 @@ const Buttons = styled.div`
 `;
 
 const WriteForm = ({ 
+    postId,
     category,
     handleContent
 }) => {
+    const [disabled, setDisabled] = useState(false);
     const [buttonView, setButtonView] = useState(true);
-    const handleButton = () => {
-        setButtonView(false);
-    };
     const [inputText, setInput] = useState("");
+    
     const handleChange = e => {
         setInput(e.target.value);
+    };
+
+    const handleClick = (categoryId, inputText, postId) => {
+        if (inputText === "") {
+            return toast.error("작성 후 신청 해주세요.");
+        }
+        setButtonView(false);
+        setDisabled(true);
+        handleContent(categoryId, inputText, postId);
     };
 
     return (
@@ -62,16 +72,15 @@ const WriteForm = ({
                 <PlusText text={category.text} />
                 <InputBox>
                     <TextFields 
+                        disabled={disabled}
                         text={category.text} 
                         inputText={inputText}
                         handleChange={handleChange}
                     />
                 </InputBox>
-                <Buttons onClick={() => handleButton()}>
-                    {buttonView  
-                        ?   <ButtonSquare onClick={() => handleContent(category.id, inputText)} text="신청 하기" />
-                        :   <ButtonSquare type="disable" text="신청 완료" />
-                    }
+                <Buttons>
+                    {buttonView === true && <ButtonSquare onClick={() => handleClick(category.id, inputText, postId)} text="신청 하기" /> }
+                    {buttonView === false && <ButtonSquare type="defaultGrey" text="신청 완료" /> }
                 </Buttons>
             </form>
         </Form>
@@ -80,6 +89,7 @@ const WriteForm = ({
 
 WriteForm.propTypes = {
     category : PropTypes.object.isRequired,
+    content : PropTypes.string,
     handleContent : PropTypes.func,
 };
 

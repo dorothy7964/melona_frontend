@@ -8,6 +8,7 @@ import UserCard from "../../Components/UserCard";
 import ButtonConfirm from "../../Components/ButtonConfirm";
 import WriteForm from "../../Components/WriteForm";
 import WriteFormMe from "../../Components/WriteFormMe";
+import DraggableDialog from "../../Components/DraggableDialog";
 
 const Wrapper = styled.div`
     min-height: ${props => props.theme.minHeight};
@@ -18,12 +19,17 @@ const CategoryBox = styled.div`
 `;
 
 const WriteApplyPresenter = ({ 
+    open,
     action,
     data,
     loading,
     postId, 
-    ToggleApply ,
+    handleComplete,
     handleContent,
+    handleClose,
+    handleClickOpen,
+    handleCancel,
+    handleAbort,
 }) => {
     if (loading === true) {
         return (
@@ -55,6 +61,18 @@ const WriteApplyPresenter = ({
                 </Helmet>
                 {action === "view" && (
                     <React.Fragment>
+                        <DraggableDialog 
+                            type="backButton"
+                            postId={postId}
+                            open={open}
+                            routeText="뒤로 가기"
+                            mainText="신청 하신 내용이 초기화 됩니다."
+                            handleClose={handleClose}
+                            handleClickOpen={handleClickOpen}
+                            handleCancel={handleCancel}
+                            handleAbort={handleAbort}
+
+                        />
                         <UserCard 
                             bgColor="#eee"
                             avatar={avatar}
@@ -70,6 +88,7 @@ const WriteApplyPresenter = ({
                                     !anotherPage
                                         ?   <WriteForm  
                                                 key={category.id}
+                                                postId={postId}
                                                 category={category}
                                                 handleContent={handleContent}
                                             />
@@ -81,7 +100,7 @@ const WriteApplyPresenter = ({
                                     
                             ))}
                         </CategoryBox>
-                        <ButtonConfirm onClick={() => ToggleApply(postId)} />
+                        <ButtonConfirm onClick={handleComplete} />
                     </React.Fragment>
                 )}
                 {action === "feed" && (
@@ -99,12 +118,18 @@ const WriteApplyPresenter = ({
 };
 
 WriteApplyPresenter.propTypes = {
+    open : PropTypes.bool.isRequired,
     action : PropTypes.string.isRequired,
     data : PropTypes.object,
     loading : PropTypes.bool.isRequired,
     postId : PropTypes.string.isRequired,
-    ToggleApply : PropTypes.func.isRequired,
+    handleComplete : PropTypes.func.isRequired,
     handleContent : PropTypes.func.isRequired,
+    handleRemove : PropTypes.func.isRequired,
+    handleClose : PropTypes.func.isRequired,
+    handleClickOpen : PropTypes.func.isRequired,
+    handleCancel : PropTypes.func.isRequired,
+    handleAbort : PropTypes.func.isRequired,
 };
 
 export default WriteApplyPresenter;

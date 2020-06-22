@@ -1,8 +1,11 @@
 import React from "react";
 import { useMutation } from "react-apollo-hooks";
 import PostBoxPresenter from "./PostBoxPresenter";
-import { DELETE_CONTENTS, UNCONNECT_CONTENTSREQ} from "./PostBoxQueries";
-import { CONNECT_APPLY } from "../../SharedQueries";
+import { 
+    DELETE_CONTENTS, 
+    UNCONNECT_CONTENTSREQ, 
+    CONNECT_APPLY 
+} from "./PostBoxQueries";
 
 export default ({ 
     iconImg,

@@ -187,13 +187,6 @@ export const SEE_BUY_ONE = gql`
     }
 `;
 
-// PostBoxContainer, WriteApplyContainer
-export const CONNECT_APPLY = gql`
-    mutation connectApply ($postId: String!) {
-        connectApply (postId: $postId)
-    }
-`;
-
 // TransferListDialogs
 export const ADDMEMBER_LIST = gql`
     query addMemberList ($userNameArr: [String!]!) {

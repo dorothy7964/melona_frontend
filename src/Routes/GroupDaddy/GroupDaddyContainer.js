@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-apollo-hooks";
 import GroupDaddyPresenter from "./GroupDaddyPresenter";
 import { SEEBUY_GROUP } from "./GroupDaddyQueries";
@@ -35,6 +35,10 @@ export default ({ groupRoomId }) => {
             }
         })
     }
+
+    useEffect(() => {
+        refetch();
+    }, []);
  
     return (
         <GroupDaddyPresenter 

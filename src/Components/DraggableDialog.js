@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 import { lightGreen, grey }from "@material-ui/core/colors";
 import FatText from "./FatText";
+import BackRoute from "./BackRoute";
 
 const useStyles = makeStyles(theme => ({
     fabGreen: {
@@ -30,6 +31,7 @@ function PaperComponent(props) {
 }
 
 const DraggableDialog = ({
+    type = "default",
     postId,
     open,
     iconImg,
@@ -42,45 +44,81 @@ const DraggableDialog = ({
     handleAbort,
 }) => {
     const classes = useStyles();
+    const [action] = useState(type);
 
-    return (
-        <div>
-            <Button onClick={handleClickOpen}>
-                <img alt="loading" src={iconImg} /> 
-                <FatText text={iconText} />
-            </Button>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                PaperComponent={PaperComponent}
-                aria-labelledby="draggable-dialog-title"
-            >
-                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                    {routeText}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        <FatText text={mainText} />
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button autoFocus onClick={handleAbort} className={classes.fabGrey}>
-                        <FatText text="취소" color={classes.fabGrey} />
-                    </Button>
-                    <Button onClick={() => handleCancel(postId)} className={classes.fabGreen} >
-                        <FatText text="확인" color={classes.fabGreen} />
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+    if (action === "default") {
+        return (
+            <div>
+                <Button onClick={handleClickOpen}>
+                    <img alt="loading" src={iconImg} /> 
+                    <FatText text={iconText} />
+                </Button>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    PaperComponent={PaperComponent}
+                    aria-labelledby="draggable-dialog-title"
+                >
+                    <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                        {routeText}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            <FatText text={mainText} />
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleAbort} className={classes.fabGrey}>
+                            <FatText text="취소" color={classes.fabGrey} />
+                        </Button>
+                        <Button onClick={() => handleCancel(postId)} className={classes.fabGreen} >
+                            <FatText text="확인" color={classes.fabGreen} />
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
+    } else if (action === "backButton") {
+        return (
+            <div>
+                <BackRoute 
+                    type="button" 
+                    onClick={handleClickOpen}
+                />
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    PaperComponent={PaperComponent}
+                    aria-labelledby="draggable-dialog-title"
+                >
+                    <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                        {routeText}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            <FatText text={mainText} />
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleAbort} className={classes.fabGrey}>
+                            <FatText text="취소" color={classes.fabGrey} />
+                        </Button>
+                        <Button onClick={() => handleCancel(postId)} className={classes.fabGreen} >
+                            <FatText text="확인" color={classes.fabGreen} />
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
+    }
 };
 
 DraggableDialog.propTypes = {
+    type : PropTypes.string,
     postId : PropTypes.string,
     open : PropTypes.bool.isRequired,
-    iconImg : PropTypes.string.isRequired,
-    iconText : PropTypes.string.isRequired,
+    iconImg : PropTypes.string,
+    iconText : PropTypes.string,
     routeText : PropTypes.string.isRequired,
     mainText : PropTypes.string.isRequired,
     handleClose : PropTypes.func.isRequired,
