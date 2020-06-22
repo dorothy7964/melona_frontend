@@ -80,7 +80,6 @@ export default ({ match: { params: { postId } }}) => {
         toast.success("신청을 취소하지 않습니다.");
     };
 
-
     return (
         <WriteApplyPresenter 
             open={open}
