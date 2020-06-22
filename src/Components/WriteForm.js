@@ -88,9 +88,9 @@ const WriteForm = ({
 }
 
 WriteForm.propTypes = {
+    postId : PropTypes.object.isRequired,
     category : PropTypes.object.isRequired,
-    content : PropTypes.string,
-    handleContent : PropTypes.func,
+    handleContent : PropTypes.func.isRequired,
 };
 
 export default WriteForm;
