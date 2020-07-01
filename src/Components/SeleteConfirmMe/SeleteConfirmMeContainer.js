@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "react-apollo-hooks";
 import CheckContent from "../CheckContent";
-import { TOGGLE_CONTENTREQ } from "./SeleteConfirmMeQueries";
+import { TOGGLE_CONTENTREQ, TRUE_APPLY } from "./SeleteConfirmMeQueries";
 
-export default ({ contentId, contentText }) => {
+export default ({ postId, contentId, contentText }) => {
     const [toggleContnetsReqMutation] = useMutation(TOGGLE_CONTENTREQ);
     
     // switches
     const [switchState, setSwitch] = useState(false);
+    const [trueApplyMutation] = useMutation(TRUE_APPLY);
 
-    const handleSwitch = (contentId) => {
+    const handleSwitch = (contentId, postId) => {
         setSwitch(!switchState);
-        handleConnect(contentId);
+        handleConnect(contentId, postId);
     };
     
     // switches & Mutation
-    const handleConnect = async(contentId) => {
+    const handleConnect = async(contentId, postId) => {
         await toggleContnetsReqMutation({
             variables: {
                 contentId
+            }   
+        });
+        await trueApplyMutation({
+            variables: {
+                postId
             }   
         });
     };
@@ -32,6 +38,7 @@ export default ({ contentId, contentText }) => {
 
     return (
         <CheckContent 
+            postId={postId}
             contentText={contentText}
             switchState={switchState}
             handleState={contentId}

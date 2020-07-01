@@ -38,6 +38,7 @@ const CategoryBox = styled.div`
 `;
 
 const WriteFormMe = ({ 
+    postId,
     category,
 }) => {
     return (
@@ -48,6 +49,7 @@ const WriteFormMe = ({
                     {category.contents.map(content => (
                         <ContentsBox key={content.id}>
                             <SeleteConfirmMe 
+                                postId={postId}
                                 contentId={content.id} 
                                 contentText={content.text}
                             />
@@ -60,6 +62,7 @@ const WriteFormMe = ({
 }
 
 WriteFormMe.propTypes = {
+    postId : PropTypes.string.isRequired,
     category : PropTypes.object.isRequired,
     ToggleApply : PropTypes.func,
 };

@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import WriteApplyPresenter from "./WriteApplyPresenter";
-import { CONNECT_CONTNETS, DELETE_CONTENTS, TRUE_APPLY, FALSE_APPLY } from "./WriteApplyQueries";
+import { 
+    CONNECT_CONTNETS, 
+    DELETE_CONTENTS, 
+    UNCONNECT_CONTENTSREQ, 
+    TRUE_APPLY, 
+    FALSE_APPLY 
+} from "./WriteApplyQueries";
 import { SEE_BUY_ONE } from "../../SharedQueries";
 
 export default ({ match: { params: { postId } }}) => {
@@ -14,6 +20,7 @@ export default ({ match: { params: { postId } }}) => {
     const [falseApplyMutation] = useMutation(FALSE_APPLY);
     const [coonnectContentsMutation] = useMutation(CONNECT_CONTNETS);
     const [deleteContentsMutation] = useMutation(DELETE_CONTENTS);
+    const [unConnectContentsReqMutation] = useMutation(UNCONNECT_CONTENTSREQ);
 
     const handleComplete = () => {
         toast.success("신청 완료 되었습니다.");
@@ -50,6 +57,11 @@ export default ({ match: { params: { postId } }}) => {
                 } 
             });
             await falseApplyMutation({
+                variables: {
+                    postId
+                }   
+            }); 
+            await unConnectContentsReqMutation({
                 variables: {
                     postId
                 }   

@@ -30,6 +30,7 @@ const Texts = styled.div`
 `;
 
 const CheckContent = ({ 
+    postId,
     contentText,
     switchState,
     handleState = "",
@@ -43,7 +44,7 @@ const CheckContent = ({
             <SwitchBox>
                 <Switches 
                     switchState={switchState}
-                    handleSwitch={() => handleSwitch(handleState)}   
+                    handleSwitch={() => handleSwitch(handleState, postId)}   
                 />
             </SwitchBox>
         </Wrapper>

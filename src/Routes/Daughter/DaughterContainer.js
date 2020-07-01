@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-apollo-hooks";
 import DaughterPresenter from "./DaughterPresenter";
 import { SEE_BUYME } from "./DaughterQueries";
@@ -34,6 +34,10 @@ export default () => {
             }
         })
     }
+
+    useEffect(() => {
+        refetch();
+    }, []);
  
     return (
         <DaughterPresenter 

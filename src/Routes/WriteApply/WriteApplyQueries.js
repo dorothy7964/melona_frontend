@@ -23,3 +23,9 @@ export const FALSE_APPLY = gql`
         falseApply (postId: $postId)
     }
 `;
+
+export const UNCONNECT_CONTENTSREQ = gql`
+    mutation unConnectContentsReq ($postId: String!) {
+        unConnectContentsReq (postId: $postId)
+    }
+`;
