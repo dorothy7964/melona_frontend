@@ -10,10 +10,10 @@ const Tabs = styled.div`
     cursor: pointer;
     button {
         &:first-child { 
-            background-color: ${props => props.tab === "daddy" ?  "#eee" : "white"};
+            background-color: ${props => props.tab === "daddy" ?  "white" : "#eee"};
         }
         &:last-child { 
-            background-color: ${props => props.tab === "daughter" ? "#eee" : "white"};
+            background-color: ${props => props.tab === "daughter" ? "white" : "#eee"};
         }
     }
 `;

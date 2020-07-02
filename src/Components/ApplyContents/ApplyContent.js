@@ -6,6 +6,10 @@ import PlusText from "../PlusText";
 import Loader from "../Loader";
 import ApplyContentSwitch from "./ApplyContentSwitch";
 
+const ContentBox = styled.div`
+    margin: 40px 0;
+`;
+
 const CategoryText = styled.div`
     margin-top: 20px;
     margin-left: 20px;
@@ -33,7 +37,7 @@ export default ({
     } else if (!loading && data && data.applyContents) {
         const { applyContents } = data;
         return (
-            <React.Fragment>
+            <ContentBox>
                 {applyContents.map(contents => (
                     <CategoryText key={contents.id}>
                         <PlusText 
@@ -46,7 +50,7 @@ export default ({
                         />
                     </CategoryText>
                 ))} 
-            </React.Fragment>
+            </ContentBox>
         );
     }
 };
