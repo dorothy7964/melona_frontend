@@ -49,18 +49,38 @@ export default ({ match: { params: { postId } }}) => {
         }
     };
 
-    const handleRemove = async(postId) => {
+    const handleDeleteApply = async(postId) => {
+        try {
+            await falseApplyMutation({
+                variables: {
+                    postId
+                }   
+            }); 
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const handleDeleteContent = async(postId) => {
         try {
             await deleteContentsMutation({
                 variables: {
                     postId
                 } 
             });
-            await falseApplyMutation({
-                variables: {
-                    postId
-                }   
-            }); 
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const handleRemove = async(postId) => {
+        handleDeleteApply(postId);
+        handleDeleteContent(postId);
+        handleDeleteContentReq(postId);
+    };
+
+    const handleDeleteContentReq = async(postId) => {
+        try {
             await unConnectContentsReqMutation({
                 variables: {
                     postId
