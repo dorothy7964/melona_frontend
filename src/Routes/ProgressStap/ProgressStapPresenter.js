@@ -23,7 +23,8 @@ const ApplyUserBox = styled.div`
 
 const ReplayButton = styled.div`
     background-color: inherit;
-    margin: 20px 0;
+    width: 100%;
+    margin-bottom: 30px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -59,15 +60,6 @@ export default ({ data, loading, handleProgressApply }) => {
                 <Helmet>
                     <title>진행상황 | Melona</title>
                 </Helmet>
-                <UserCard 
-                    bgColor="#eee"
-                    avatar={user.avatar}
-                    userName={user.userName}
-                    applys={applysRead}
-                    applysCount={applysReadCount}
-                    location={location}
-                    lastDate={lastDate}
-                />
                 <ReplayButton>
                     {groupRoom === "none"
                         ?   !anotherPage
@@ -87,6 +79,15 @@ export default ({ data, loading, handleProgressApply }) => {
                         
                     }                
                 </ReplayButton>
+                <UserCard 
+                    bgColor="#eee"
+                    avatar={user.avatar}
+                    userName={user.userName}
+                    applys={applysRead}
+                    applysCount={applysReadCount}
+                    location={location}
+                    lastDate={lastDate}
+                />
                 <ApplyUserBox>
                     {anotherPage === true && 
                         <ButtonSquare 
