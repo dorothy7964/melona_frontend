@@ -7,7 +7,6 @@ import Loader from "../Loader";
 import ApplyContentSwitchMe from "./ApplyContentSwitchMe";
 
 const Container = styled.div`
-    margin-top: 20px;
     span {
         font-weight: 600;
         font-size: 14pt;
@@ -21,6 +20,10 @@ const ContentText = styled.div`
         font-weight: 600;
         font-size: 14pt;
     }
+`;
+
+const ContentBox = styled.div`
+    margin: 40px 0;
 `;
 
 export default ({
@@ -43,20 +46,23 @@ export default ({
         
         return (
             <Container>
-                <PlusText 
-                    text={categoryText} 
-                />
                 {viewContents.map(contents => (
                     <ContentText key={contents.id}>
                         {contents.contentsReqs.map(contentsReqs => (
                             <div key={contentsReqs.id}>
                                 {userName === contentsReqs.user.userName &&
-                                    <ApplyContentSwitchMe 
-                                        contentText={contents.text}
-                                        contentReqId={contentsReqs.id}
-                                        contentReqCheck={contentsReqs.confirmCheck}
-                                    />
-                                }
+                                    contents.text !== "" && (
+                                    <ContentBox>
+                                        <PlusText 
+                                            text={categoryText} 
+                                        />
+                                        <ApplyContentSwitchMe 
+                                            contentText={contents.text}
+                                            contentReqId={contentsReqs.id}
+                                            contentReqCheck={contentsReqs.confirmCheck}
+                                        />
+                                    </ContentBox>
+                                )}
                             </div>
                         ))}
                     </ContentText>
