@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const ApplyUserBox = styled.div`
-    margin-bottom: 30px;
+    margin: 30px 0;
     button {
         width: 100%;
         font-size: 15pt;
