@@ -50,6 +50,7 @@ export default ({ data, loading, handleProgressApply }) => {
                 location,
                 lastDate,
                 categorys,
+                isProgress,
                 anotherPage,
                 groupRoom
             } 
@@ -89,7 +90,7 @@ export default ({ data, loading, handleProgressApply }) => {
                     lastDate={lastDate}
                 />
                 <ApplyUserBox>
-                    {anotherPage === true && 
+                    {anotherPage === true && isProgress === false &&
                         <ButtonSquare 
                             text="전체 진행상황 완료"
                             onClick={handleProgressApply}

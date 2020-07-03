@@ -26,6 +26,14 @@ const ConfirmFileBox = styled.div`
     height: 200px;
 `;
 
+const Bold = styled.span`
+    font-weight: 600;
+    color: ${props => props.theme.lightGreenColor};
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+`;
+
 const QontoConnector = withStyles({
     alternativeLabel: {
         top: 10,
@@ -214,7 +222,7 @@ export default ({
                 {activeStep === steps.length ? (
                     <div>
                         <Typography className={classes.instructions}>
-                            진행이 완료 되었습니다.
+                            <Bold>진행이 완료 되었습니다.</Bold>
                         </Typography>
                     </div>
                 ) : (

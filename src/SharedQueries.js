@@ -132,6 +132,7 @@ export const SEE_BUY_ONE = gql`
             isApply
             isApplyWait
             isApplyReadCheck
+            isProgress
             applysCount
             applysReadCount
             commentCount
