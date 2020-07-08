@@ -11,14 +11,18 @@ export default ({ history, match: { params: { postId } } }) => {
         variables: { postId }
     });
 
-    const handleProgressApply = async() => {
+    const handleProgressApply = async(groupRoom) => {
         await progressApplyMeMutation({
             variables: {
                 postId
             }
         });
+        if (groupRoom === "none") {
+            history.push("/apply");
+        } else {
+            history.push(`/applyGroup/${groupRoom}`);
+        }
         toast.success("진행이 완료 되었습니다.");
-        history.push("/apply");
     };
 
     return (

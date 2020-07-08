@@ -93,7 +93,7 @@ export default ({ data, loading, handleProgressApply }) => {
                     {anotherPage === true && isProgress === false &&
                         <ButtonSquare 
                             text="전체 진행상황 완료"
-                            onClick={handleProgressApply}
+                            onClick={() => handleProgressApply(groupRoom)}
                         />
                     }
                 </ApplyUserBox>

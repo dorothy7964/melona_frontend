@@ -19,6 +19,7 @@ export const SEE_BUY = gql`
             isApply
             isApplyWait
             isApplyReadCheck
+            isProgress
             applysCount
             commentCount
             viewApply
@@ -27,6 +28,7 @@ export const SEE_BUY = gql`
                 id
                 apply
                 readCheck
+                progress
                 user {
                     userName
                     avatar
@@ -45,7 +47,7 @@ export const SEE_BUY = gql`
     }
 `;
 
-// BuyGroupContainer, ApplyGroupContainer
+// BuyGroupContainer
 export const SEEBUY_GROUP = gql`
     query seeBuyGroup ($groupRoomId: String!) {
         seeBuyGroup (groupRoomId: $groupRoomId) {
@@ -55,6 +57,7 @@ export const SEEBUY_GROUP = gql`
             isApply
             isApplyWait
             isApplyReadCheck
+            isProgress
             applysCount
             commentCount
             viewApply
@@ -63,6 +66,7 @@ export const SEEBUY_GROUP = gql`
                 id
                 apply
                 readCheck
+                progress
                 user {
                     userName
                     avatar
@@ -80,6 +84,50 @@ export const SEEBUY_GROUP = gql`
         }
     }
 `;
+
+// ApplyGroupContainer
+export const SEEBUYME_GROUP = gql`
+    query seeBuyMeGroup ($groupRoomId: String!) {
+        seeBuyMeGroup (groupRoomId: $groupRoomId) {
+            id
+            location
+            lastDate
+            isApply
+            isApplyWait
+            isApplyReadCheck
+            isProgress
+            applysCount
+            commentCount
+            viewApply
+            anotherPage
+            applys {
+                id
+                apply
+                readCheck
+                progress
+                user {
+                    userName
+                    avatar
+                }
+            }
+            user {
+                userName
+                avatar
+                isSelf
+           }
+            categorys {
+                id
+                text
+                contents {
+                    id
+                    text
+                    check
+                }
+            }
+        }
+    }
+`;
+
 
 // DaughterContainer
 export const SEE_BUYME = gql`
@@ -91,6 +139,7 @@ export const SEE_BUYME = gql`
             isApply
             isApplyWait
             isApplyReadCheck
+            isProgress
             applysCount
             commentCount
             viewApply
@@ -99,6 +148,7 @@ export const SEE_BUYME = gql`
                 id
                 apply
                 readCheck
+                progress
                 user {
                     userName
                     avatar

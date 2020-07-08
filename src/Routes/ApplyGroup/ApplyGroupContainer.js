@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-apollo-hooks";
 import ApplyGroupPresenter from "./ApplyGroupPresenter";
-import { ME, SEEBUY_GROUP } from "../../SharedQueries";
+import { ME, SEEBUYME_GROUP } from "../../SharedQueries";
 
 export default ({ match: { params: { groupRoomId } }}) => {
     const [tab, setTab] = useState("req");
-    const { refetch } = useQuery(SEEBUY_GROUP, {
+    const { refetch } = useQuery(SEEBUYME_GROUP, {
         variables: {
             groupRoomId
         }
