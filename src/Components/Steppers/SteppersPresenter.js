@@ -18,6 +18,19 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import UploadPhoto from "../UploadPhoto";
 
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    height: 30px;
+`;
+
+const TextBox = styled.div`
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    margin: 10px;
+`;
+
 const ConfirmFileBox = styled.div`
     background-image: url(${props => props.progressFile});
     background-size: cover;
@@ -220,20 +233,22 @@ export default ({
             </Stepper>
             <div>
                 {activeStep === steps.length ? (
-                    <div>
+                    <Container>
                         <Typography className={classes.instructions}>
                             <Bold>진행이 완료 되었습니다.</Bold>
                         </Typography>
-                    </div>
+                    </Container>
                 ) : (
                     <ThemeProvider theme={defaultMaterialTheme}>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                        <div>
+                        <TextBox>
+                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                        </TextBox>
+                        <Container>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 이전
                             </Button>
                             {isStepOptional(activeStep) && (
-                                <React.Fragment>
+                                <Container>
                                     <Button>
                                         <UploadPhoto 
                                             handleUpload={handleUpload}
@@ -257,7 +272,7 @@ export default ({
                                                 인증 사진 취소
                                             </Button>
                                     }
-                                </React.Fragment>
+                                </Container>
                             )}
                             <Button
                                 variant="contained"
@@ -270,7 +285,7 @@ export default ({
                             {progressFile && activeStep === 1 &&
                                 <ConfirmFileBox progressFile={progressFile} />
                             }
-                        </div>
+                        </Container>
                     </ThemeProvider>
                 )}
             </div>

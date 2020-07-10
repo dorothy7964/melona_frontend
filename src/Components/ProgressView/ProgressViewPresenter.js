@@ -34,6 +34,7 @@ const StepBox = styled.div`
 const ProgressFileBox = styled.div`
     margin-top: 10px;
     display: flex;
+    margin-top: 30px;
     justify-content: center;
     button {
         font-weight: 600;
@@ -100,6 +101,25 @@ export default ({
                                                     stepNum={contentsReqs.confirmProgress}
                                                     anotherPage={anotherPage}
                                                 />
+                                            }
+                                            {contentsReqs.confirmProgress === 3 &&
+                                                <ProgressFileBox>
+                                                    <ButtonSquare 
+                                                        onClick={handleClickOpen}
+                                                        text="인증 사진 보기"
+                                                    />
+                                                    <ProgressFile
+                                                        open={open}
+                                                        handleClose={handleClose}
+                                                        categorys={[{
+                                                            id : contents.category.id,
+                                                            userName: userName,
+                                                            anotherPage: anotherPage
+                                                        }]}
+                                                        userName={userName}
+                                                        anotherPage={anotherPage}
+                                                    />
+                                                </ProgressFileBox>
                                             }
                                         </div>
                                     ))}
