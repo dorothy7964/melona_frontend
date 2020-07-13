@@ -15,6 +15,7 @@ export const SEE_COMMENT = gql`
                     userName
                     isSelf
                 }
+                createdAt
             }
             createdAt
             user {

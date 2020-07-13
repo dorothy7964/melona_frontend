@@ -115,7 +115,7 @@ export default ({ comment, handleReDelete }) => {
                                         }
                                     </TextBox>
                                     <TimeForm>
-                                        <TimeIapse createAt={comment.createdAt} />
+                                        <TimeIapse createAt={recomment.createdAt} />
                                     </TimeForm>
                                 </Comments>
                             
