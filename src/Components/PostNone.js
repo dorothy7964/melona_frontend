@@ -26,6 +26,6 @@ const TextBox = styled.div`
 export default () => (
     <TextBox>
         <img alt="togeter" src={togeter} />
-        <FatText text="게시물을 추가 해주세요." />
+        <FatText text="게시물이 존재하지 않습니다." />
     </TextBox>
 );
