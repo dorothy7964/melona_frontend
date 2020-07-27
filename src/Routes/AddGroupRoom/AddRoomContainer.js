@@ -45,6 +45,10 @@ export default ({ history, match: { params: { userName } }}) => {
 
     // Mutation
     const handleConfirm = async() => {
+        if (roomName === "") {
+           return toast.error("그룹 이름을 작성 해주세요.");
+        }
+
         try {
             await createGroupRoomMutation({
                 variables: {
