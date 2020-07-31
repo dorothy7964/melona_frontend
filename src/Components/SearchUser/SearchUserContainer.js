@@ -3,18 +3,24 @@ import { useQuery } from "react-apollo-hooks";
 import SearchUserPresenter from "./SearchUserPresenter"
 import { SEARCH_USER } from "./SearchUserQueries";
 
-export default ({ term, handleToggleFollow }) =>  {
-    const { data, loading } = useQuery(SEARCH_USER, {
+export default ({ term, searchRefetch, handleToggleFollow }) =>  {
+    const { data, loading, refetch } = useQuery(SEARCH_USER, {
         skip:  term === "",
         variables: { term }
     });
-    
-    return (
-        <SearchUserPresenter 
-            data={data}
-            loading={loading}
-            term={term}
-            handleToggleFollow={handleToggleFollow}
-        />
-   );
+
+    if (searchRefetch === true) {
+        refetch();
+        return "";
+
+    } else {
+        return (
+            <SearchUserPresenter 
+                data={data}
+                loading={loading}
+                term={term}
+                handleToggleFollow={handleToggleFollow}
+            />
+       );
+    }
 };

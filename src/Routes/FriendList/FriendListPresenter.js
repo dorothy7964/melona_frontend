@@ -42,6 +42,7 @@ const TitleBox = styled.div`
 export default ({ 
     data, 
     loading, 
+    searchRefetch, 
     handleToggleFollow
 }) => {
     if (loading === true){
@@ -64,6 +65,7 @@ export default ({
                 <ShadowBox>
                     <SearchBox>
                         <SearchUser
+                            searchRefetch={searchRefetch}
                             handleToggleFollow={handleToggleFollow}
                         />
                     </SearchBox>

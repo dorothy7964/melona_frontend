@@ -29,7 +29,7 @@ const SearchUserBox = styled.div`
    margin-top: 20px;
 `;
 
-export default ({ handleToggleFollow }) => {
+export default ({ searchRefetch, handleToggleFollow }) => {
     const [iconView, setIconView] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -69,6 +69,7 @@ export default ({ handleToggleFollow }) => {
             <SearchUserBox>
                 <SearchUserContainer 
                     term={searchTerm}
+                    searchRefetch={searchRefetch}
                     handleToggleFollow={handleToggleFollow}
                 />
             </SearchUserBox>
