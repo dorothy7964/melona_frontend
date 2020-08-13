@@ -77,6 +77,7 @@ const MessageBubble = styled.div`
     padding: 7px 5px;
     font-size:12px;
     max-width: 300px;
+    word-break: break-word;
 `;
 
 const TimeForm = styled.div`
