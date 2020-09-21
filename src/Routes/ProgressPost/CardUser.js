@@ -42,7 +42,7 @@ export default ({
                 }
             </ApplyUserBox>
             {categorys.map(category => (
-            <ProgressApply
+                <ProgressApply
                     key={category.id}
                     categoryId={category.id}
                     userName={userName}

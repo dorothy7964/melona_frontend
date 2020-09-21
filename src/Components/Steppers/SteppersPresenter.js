@@ -35,6 +35,8 @@ const ConfirmFileBox = styled.div`
     background-image: url(${props => props.progressFile});
     background-size: cover;
     display: flex;
+    margin: 0 auto;
+    margin-top: 30px;
     width: 200px;
     height: 200px;
 `;
@@ -282,10 +284,10 @@ export default ({
                             >
                                 {activeStep === steps.length - 1 ? '완료' : '다음'}
                             </Button>
-                            {progressFile && activeStep === 1 &&
-                                <ConfirmFileBox progressFile={progressFile} />
-                            }
                         </Container>
+                        {progressFile && activeStep === 1 &&
+                            <ConfirmFileBox progressFile={progressFile} />
+                        }
                     </ThemeProvider>
                 )}
             </div>
