@@ -99,6 +99,7 @@ export default ({
                                                 <Steppers
                                                     contentId={contentsReqs.id}
                                                     stepNum={contentsReqs.confirmProgress}
+                                                    confirmFile={contentsReqs.confirmFile}
                                                     anotherPage={anotherPage}
                                                 />
                                             }

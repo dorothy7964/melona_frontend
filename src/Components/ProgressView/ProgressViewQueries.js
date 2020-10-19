@@ -9,6 +9,7 @@ export const CATEGORY_CONTENTSSELF = gql`
             confirmProgress
             contentsReqs {
                 id
+                confirmFile
                 confirmCheck
                 confirmProgress
                     user {
