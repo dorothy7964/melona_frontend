@@ -86,22 +86,29 @@ export default ({
         return (
             categoryContents.map(contents => (
                 <Wrapper key={contents.id}>
-                    
-                    {contents.confirmFile !== "none"
-                        ?   !anotherPage
+                    {!anotherPage 
+                        ?   contents.confirmFile === "none"
                                 ?   <ConfirmFileBox>
+                                        <img alt="인증 사진" src={confirmFileText} />
+                                    </ConfirmFileBox>
+                                :   <ConfirmFileBox>
                                         <img alt="인증 사진" src={contents.confirmFile} />
                                     </ConfirmFileBox>
-                                :   contents.contentsReqs.map(contentsReqs => (
-                                        <ConfirmFileBox
-                                            key={contentsReqs.id}
-                                        >
-                                            <img alt="인증 사진" src={contentsReqs.confirmFile} />
-                                        </ConfirmFileBox>
-                                    ))
-                        :   <ConfirmFileBox>
-                                <img alt="인증 사진" src={confirmFileText} />
-                            </ConfirmFileBox>
+                                    
+                        :   contents.contentsReqs.map(contentsReqs => (
+                                <ConfirmFileBox
+                                    key={contentsReqs.id}
+                                >
+                                    {contentsReqs.confirmFile === "none"
+                                        ?   <ConfirmFileBox>
+                                                <img alt="인증 사진" src={confirmFileText} />
+                                            </ConfirmFileBox>
+                                        :   <ConfirmFileBox>
+                                                <img alt="인증 사진" src={contentsReqs.confirmFile} />
+                                            </ConfirmFileBox>
+                                    }
+                                </ConfirmFileBox>
+                            ))
                     }
                     <TextContainer>
                         <CategoryBox>

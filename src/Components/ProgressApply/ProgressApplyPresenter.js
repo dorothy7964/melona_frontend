@@ -79,31 +79,29 @@ export default ({
                                     {contents.contentsReqs.map(contentsReqs => (
                                         <div key={contentsReqs.id}>
                                             {userName === contentsReqs.user.userName &&
-                                                <SteppersView 
-                                                    activeStep={contentsReqs.confirmProgress}
+                                            <SteppersView 
+                                                activeStep={contentsReqs.confirmProgress}
+                                            />}
+                                            {contentsReqs.confirmProgress !== 0 &&
+                                            <ProgressFileBox>
+                                                <ButtonSquare 
+                                                    onClick={handleClickOpen}
+                                                    text="인증 사진 보기"
                                                 />
-                                            }
+                                                <ProgressFile
+                                                    open={open}
+                                                    handleClose={handleClose}
+                                                    categorys={[{
+                                                        id : contents.category.id,
+                                                        userName: userName,
+                                                        anotherPage: anotherPage
+                                                    }]}
+                                                    userName={userName}
+                                                    anotherPage={anotherPage}
+                                                />
+                                            </ProgressFileBox>}
                                         </div>
                                     ))}
-                                    {contents.contentsReqs.confirmProgress !== 0 &&
-                                        <ProgressFileBox>
-                                            <ButtonSquare 
-                                                onClick={handleClickOpen}
-                                                text="인증 사진 보기"
-                                            />
-                                            <ProgressFile
-                                                open={open}
-                                                handleClose={handleClose}
-                                                categorys={[{
-                                                    id : contents.category.id,
-                                                    userName: userName,
-                                                    anotherPage: anotherPage
-                                                }]}
-                                                userName={userName}
-                                                anotherPage={anotherPage}
-                                            />
-                                        </ProgressFileBox>
-                                    }
                                 </StepBox>
                         }
                     </div>
