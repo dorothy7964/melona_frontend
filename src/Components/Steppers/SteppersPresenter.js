@@ -31,16 +31,6 @@ const TextBox = styled.div`
     margin: 10px;
 `;
 
-const ConfirmFileBox = styled.div`
-    background-image: url(${props => props.progressFile});
-    background-size: cover;
-    display: flex;
-    margin: 0 auto;
-    margin-top: 30px;
-    width: 200px;
-    height: 200px;
-`;
-
 const Bold = styled.span`
     font-weight: 600;
     color: ${props => props.theme.lightGreenColor};
@@ -114,7 +104,6 @@ QontoStepIcon.propTypes = {
     active: PropTypes.bool,
     completed: PropTypes.bool,
 };
-
 
 const useColorlibStepIconStyles = makeStyles({
     root: {
@@ -204,6 +193,8 @@ const getStepContent = (step) => {
 };
 
 export default ({ 
+    open,
+    contentId,
     progressFile,
     activeStep,
     isStepOptional,
@@ -212,7 +203,9 @@ export default ({
     handleBack,
     handleUpload,
     handleSkip,
-    handleReset
+    handleReset,
+    handleClickOpen,
+    handleClose,
 }) => {
     const classes = useStyles();
     const steps = getSteps();
@@ -251,29 +244,30 @@ export default ({
                             </Button>
                             {isStepOptional(activeStep) && (
                                 <Container>
-                                    <Button>
-                                        <UploadPhoto 
-                                            handleUpload={handleUpload}
-                                        />
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.button}
+                                        onClick={() => handleClickOpen(contentId)}
+                                    >
+                                        사진 업로드
                                     </Button>
-                                    {progressFile === null || progressFile === "" 
-                                        ?   <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={handleSkip}
-                                                className={classes.button}
-                                            >
-                                                넘어가기
-                                            </Button>
-                                        :   <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={handleReset}
-                                                className={classes.button}
-                                            >
-                                                인증 사진 취소
-                                            </Button>
-                                    }
+                                    <UploadPhoto
+                                        open={open}
+                                        contentId={contentId}
+                                        progressFile={progressFile}
+                                        handleClose={handleClose}
+                                        handleUpload={handleUpload}
+                                        handleReset={handleReset}
+                                    />
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleSkip}
+                                        className={classes.button}
+                                    >
+                                        넘어가기
+                                    </Button>
                                 </Container>
                             )}
                             <Button
@@ -285,9 +279,6 @@ export default ({
                                 {activeStep === steps.length - 1 ? '완료' : '다음'}
                             </Button>
                         </Container>
-                        {progressFile && activeStep === 1 &&
-                            <ConfirmFileBox progressFile={progressFile} />
-                        }
                     </ThemeProvider>
                 )}
             </div>

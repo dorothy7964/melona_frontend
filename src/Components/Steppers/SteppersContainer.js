@@ -12,6 +12,19 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
     const [progressNumMutation] = useMutation(PROGRESS_NUM);
     const [editConfirmFileMutation] = useMutation(EDIT_CONFIRMFILE);
 
+    // file upload
+    const [open, setOpen] = useState(false);
+    const [changeId, setChangeId] = useState("");
+
+    const handleClickOpen = (id) => {
+        setOpen(true);
+        setChangeId(id);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     // Stepper
     const [activeStep, setActiveStep] = useState(stepNum || 0);
     const [skipped, setSkipped] = useState(new Set());
@@ -75,19 +88,19 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
                     "Access-Control-Allow-Origin": "*"
                 }
             });
-            setProgressFile(location)
+            setProgressFile(location);
             const {
                 data: { editConfirmFile }
             } = await editConfirmFileMutation({
                 variables: {
-                    contentId,
+                    contentId: changeId,
                     anotherPage,
                     confirmFile: location
                 }
             });
             
             if (editConfirmFile){
-                toast.success("업로드 되었습니다.")
+                toast.success("업로드 되었습니다.");
             }
         } catch (e) {
             toast.error("업로드 실패하였습니다.");
@@ -119,14 +132,15 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
     };
 
     const handleReset = async() => {
-        setProgressFile("");
+        setProgressFile("none");
         try {
             const {
                 data: { editConfirmFile }
             } = await editConfirmFileMutation({
                 variables: {
-                    contentId,
-                    confirmFile: ""
+                    contentId: changeId,
+                    anotherPage,
+                    confirmFile: "none"
                 }
             });
             if (editConfirmFile){
@@ -139,6 +153,8 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
   
     return (
         <SteppersPresenter
+            open={open}
+            contentId={contentId}
             progressFile={progressFile}
             activeStep={activeStep}
             isStepOptional={isStepOptional}
@@ -148,6 +164,8 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
             handleUpload={handleUpload}
             handleSkip={handleSkip}
             handleReset={handleReset}
+            handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
         />
     );
 };
