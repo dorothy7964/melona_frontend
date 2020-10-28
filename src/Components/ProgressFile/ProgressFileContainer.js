@@ -58,6 +58,7 @@ const ContentBox = styled.span`
 `;
 
 export default ({ 
+    changeId,
     categoryId,
     userName,
     anotherPage,
@@ -85,40 +86,72 @@ export default ({
         
         return (
             categoryContents.map(contents => (
-                <Wrapper key={contents.id}>
+                <div key={contents.id}>
                     {!anotherPage 
                         ?   contents.confirmFile === "none"
-                                ?   <ConfirmFileBox>
-                                        <img alt="인증 사진" src={confirmFileText} />
-                                    </ConfirmFileBox>
-                                :   <ConfirmFileBox>
-                                        <img alt="인증 사진" src={contents.confirmFile} />
-                                    </ConfirmFileBox>
-                                    
+                                ?   <Wrapper>
+                                        <ConfirmFileBox>
+                                            <img alt="인증 사진" src={confirmFileText} />
+                                        </ConfirmFileBox>
+                                        <TextContainer>
+                                            <CategoryBox>
+                                                #{contents.category.text}
+                                            </CategoryBox>
+                                            <ContentBox>
+                                                {contents.text}
+                                            </ContentBox>
+                                        </TextContainer>
+                                    </Wrapper>
+                                :   <Wrapper>
+                                        <ConfirmFileBox>
+                                            <img alt="인증 사진" src={contents.confirmFile} />
+                                        </ConfirmFileBox>
+                                        <TextContainer>
+                                            <CategoryBox>
+                                                #{contents.category.text}
+                                            </CategoryBox>
+                                            <ContentBox>
+                                                {contents.text}
+                                            </ContentBox>
+                                        </TextContainer>
+                                    </Wrapper>
                         :   contents.contentsReqs.map(contentsReqs => (
+                            contentsReqs.id === changeId &&
                                 <ConfirmFileBox
                                     key={contentsReqs.id}
                                 >
                                     {contentsReqs.confirmFile === "none"
-                                        ?   <ConfirmFileBox>
-                                                <img alt="인증 사진" src={confirmFileText} />
-                                            </ConfirmFileBox>
-                                        :   <ConfirmFileBox>
-                                                <img alt="인증 사진" src={contentsReqs.confirmFile} />
-                                            </ConfirmFileBox>
+                                        ?   <Wrapper>
+                                                <ConfirmFileBox>
+                                                    <img alt="인증 사진" src={confirmFileText} />
+                                                </ConfirmFileBox>
+                                                <TextContainer>
+                                                    <CategoryBox>
+                                                        #{contents.category.text}
+                                                    </CategoryBox>
+                                                    <ContentBox>
+                                                        {contents.text}
+                                                    </ContentBox>
+                                                </TextContainer>
+                                            </Wrapper>
+                                        :   <Wrapper>
+                                                <ConfirmFileBox>
+                                                    <img alt="인증 사진" src={contentsReqs.confirmFile} />
+                                                </ConfirmFileBox>
+                                                <TextContainer>
+                                                    <CategoryBox>
+                                                        #{contents.category.text}
+                                                    </CategoryBox>
+                                                    <ContentBox>
+                                                        {contents.text}
+                                                    </ContentBox>
+                                                </TextContainer>
+                                            </Wrapper>
                                     }
                                 </ConfirmFileBox>
                             ))
                     }
-                    <TextContainer>
-                        <CategoryBox>
-                            #{contents.category.text}
-                        </CategoryBox>
-                        <ContentBox>
-                            {contents.text}
-                        </ContentBox>
-                    </TextContainer>
-                </Wrapper>
+                </div>
             ))
         );
     }

@@ -5,6 +5,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import ProgressFileContainer from "./ProgressFileContainer";
 
 export default ({ 
+    changeId,
     categorys,
     userName,
     anotherPage,
@@ -24,6 +25,7 @@ export default ({
                     {categorys.map(category => (
                         <ProgressFileContainer 
                             key={category.id}
+                            changeId={changeId}
                             categoryId={category.id}
                             userName={userName}
                             anotherPage={anotherPage}

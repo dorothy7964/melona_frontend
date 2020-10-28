@@ -8,10 +8,14 @@ export default ({ categoryId, userName, anotherPage }) => {
         variables: { categoryId, userName, anotherPage }
     });
 
+    const [changeId, setChangeId] = useState("");
+
     // 진행완료 팝업
     const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
+
+    const handleClickOpen = (id) => {
         setOpen(true);
+        setChangeId(id);
     };
     const handleClose = () => {
         setOpen(false);
@@ -25,6 +29,7 @@ export default ({ categoryId, userName, anotherPage }) => {
         <ProgressApplyPresenter
             data={data}
             loading={loading}
+            changeId={changeId}
             userName={userName}
             anotherPage={anotherPage}
             open={open}

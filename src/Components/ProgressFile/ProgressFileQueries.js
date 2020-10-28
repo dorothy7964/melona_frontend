@@ -6,8 +6,8 @@ export const CATEGORY_CONTENTS = gql`
             id
             text
             check
-            confirmCheck
             confirmFile
+            confirmCheck
             confirmProgress
             category {
                 id
@@ -15,8 +15,8 @@ export const CATEGORY_CONTENTS = gql`
             }
             contentsReqs {
                 id
-                confirmCheck
                 confirmFile
+                confirmCheck
                 confirmProgress
                     user {
                         id
