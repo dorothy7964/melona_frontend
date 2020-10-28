@@ -15,6 +15,7 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
     // file upload
     const [open, setOpen] = useState(false);
     const [changeId, setChangeId] = useState("");
+    const [fileLoading, setFileLoading] = useState(false);
 
     const handleClickOpen = (id) => {
         setOpen(true);
@@ -80,6 +81,7 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
         const formData = new FormData();
         formData.append("file", file);
         try {
+            setFileLoading(true);
             const {
                 data: { location }
             } = await axios.post(`${url}/api/upload`, formData, {
@@ -98,37 +100,14 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
                     confirmFile: location
                 }
             });
-            
             if (editConfirmFile){
                 toast.success("업로드 되었습니다.");
             }
         } catch (e) {
             toast.error("업로드 실패하였습니다.");
+        } finally {
+            setFileLoading(false);
         }
-    };
-
-    const handleSkip = async() => {
-        if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
-            throw new Error("You can't skip a step that isn't optional.");
-        }
-  
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped((prevSkipped) => {
-            const newSkipped = new Set(prevSkipped.values());
-            newSkipped.add(activeStep);
-            return newSkipped;
-        });
-
-        // Mutation
-        await progressNumMutation({
-            variables: { 
-                contentId,
-                anotherPage,
-                stepNum: activeStep + 1
-            }
-        });
     };
 
     const handleReset = async() => {
@@ -156,13 +135,13 @@ export default ({ contentId, stepNum, confirmFile, anotherPage }) => {
             open={open}
             contentId={contentId}
             progressFile={progressFile}
+            fileLoading={fileLoading}
             activeStep={activeStep}
             isStepOptional={isStepOptional}
             isStepSkipped={isStepSkipped}
             handleNext={handleNext}
             handleBack={handleBack}
             handleUpload={handleUpload}
-            handleSkip={handleSkip}
             handleReset={handleReset}
             handleClickOpen={handleClickOpen}
             handleClose={handleClose}

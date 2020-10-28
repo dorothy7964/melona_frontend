@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
+import { css } from "@emotion/core";
+import { FadeLoader } from "react-spinners";
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -15,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
         width: "20px"
     }
 }));
+
+const override = css`
+    position: absolute;
+    top: 52%;
+    left: 27%;
+`;
 
 const Shadow = styled.div`
     ${props => props.theme.shadowBox}
@@ -56,6 +64,7 @@ const FileButton = styled.span`
 export default ({ 
     open,
     progressFile,
+    fileLoading,
     handleClose,
     handleUpload,
     handleReset,
@@ -82,6 +91,13 @@ export default ({
                                         <img alt="인증 사진" src={progressFile} />
                                     </ConfirmFileBox>}
                         </ConfirmFileBox>
+                        {fileLoading && 
+                            <FadeLoader
+                                css={override}
+                                size={35}
+                                color={"#9ccc65"}
+                            />
+                        }
                         <TextContainer>
                             <FileButton>
                                 <input 

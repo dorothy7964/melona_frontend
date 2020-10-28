@@ -196,13 +196,13 @@ export default ({
     open,
     contentId,
     progressFile,
+    fileLoading,
     activeStep,
     isStepOptional,
     isStepSkipped,
     handleNext,
     handleBack,
     handleUpload,
-    handleSkip,
     handleReset,
     handleClickOpen,
     handleClose,
@@ -256,18 +256,11 @@ export default ({
                                         open={open}
                                         contentId={contentId}
                                         progressFile={progressFile}
+                                        fileLoading={fileLoading}
                                         handleClose={handleClose}
                                         handleUpload={handleUpload}
                                         handleReset={handleReset}
                                     />
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={handleSkip}
-                                        className={classes.button}
-                                    >
-                                        넘어가기
-                                    </Button>
                                 </Container>
                             )}
                             <Button
