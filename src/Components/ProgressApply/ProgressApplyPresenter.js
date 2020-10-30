@@ -60,55 +60,64 @@ export default ({
         const { categoryContents } = data;
       
         return (
-            <React.Fragment>
-                {categoryContents.map(contents => (
-                    <div key={contents.id}>
-                        <TextBox>
-                            <FatText text={contents.category.text} />
-                            <span>{contents.text}</span>
-                        </TextBox>
-                        {!anotherPage
-                            ?    <StepBox>
-                                    <Steppers 
-                                        contentId={contents.id}
-                                        stepNum={contents.confirmProgress}
-                                        confirmFile={contents.confirmFile}
-                                        anotherPage={false}
-                                    />
-                                </StepBox>
-                            :    <StepBox>
-                                    {contents.contentsReqs.map(contentsReqs => (
-                                        <div key={contentsReqs.id}>
-                                            {userName === contentsReqs.user.userName &&
-                                            <SteppersView 
-                                                activeStep={contentsReqs.confirmProgress}
-                                            />}
-                                            {contentsReqs.confirmProgress !== 0 &&
-                                            <ProgressFileBox>
-                                                <ButtonSquare 
-                                                    onClick={() => {handleClickOpen(contentsReqs.id)}}
-                                                    text="인증 사진 보기"
-                                                />
-                                                <ProgressFile
-                                                    open={open}
-                                                    handleClose={handleClose}
-                                                    changeId={changeId}
-                                                    categorys={[{
-                                                        id : contents.category.id,
-                                                        userName: userName,
-                                                        anotherPage: anotherPage
-                                                    }]}
-                                                    userName={userName}
-                                                    anotherPage={anotherPage}
-                                                />
-                                            </ProgressFileBox>}
-                                        </div>
-                                    ))}
-                                </StepBox>
-                        }
-                    </div>
-                ))}
-            </React.Fragment>
+            categoryContents.map(contents => (
+                <React.Fragment key={contents.id}>
+                    {!anotherPage 
+                        ?   <TextBox>
+                                <FatText text={contents.category.text} />
+                                <span>{contents.text}</span>
+                            </TextBox>
+                        :   contents.contentsReqs.map(contentsReqs => (
+                                userName === contentsReqs.user.userName &&
+                                contentsReqs.confirmCheck && 
+                                <TextBox>
+                                    <FatText text={contents.category.text} />
+                                    <span>{contents.text}</span>
+                                </TextBox>
+                            ))
+                    }
+                    {!anotherPage
+                        ?    <StepBox>
+                                <Steppers 
+                                    contentId={contents.id}
+                                    stepNum={contents.confirmProgress}
+                                    confirmFile={contents.confirmFile}
+                                    anotherPage={false}
+                                />
+                            </StepBox>
+                        :    <StepBox>
+                                {contents.contentsReqs.map(contentsReqs => (
+                                    contentsReqs.confirmCheck &&
+                                    userName === contentsReqs.user.userName &&
+                                    <React.Fragment key={contentsReqs.id}>
+                                        <SteppersView 
+                                            activeStep={contentsReqs.confirmProgress}
+                                        />
+                                        {contentsReqs.confirmProgress !== 0 &&
+                                        <ProgressFileBox>
+                                            <ButtonSquare 
+                                                onClick={() => handleClickOpen(contentsReqs.id)}
+                                                text="인증 사진 보기"
+                                            />
+                                            <ProgressFile
+                                                open={open}
+                                                handleClose={handleClose}
+                                                changeId={changeId}
+                                                categorys={[{
+                                                    id : contents.category.id,
+                                                    userName: userName,
+                                                    anotherPage: anotherPage
+                                                }]}
+                                                userName={userName}
+                                                anotherPage={anotherPage}
+                                            />
+                                        </ProgressFileBox>}
+                                    </React.Fragment>
+                                ))}
+                            </StepBox>
+                    }
+                </React.Fragment>
+            ))
         );
     }
 };
