@@ -124,7 +124,6 @@ export default ({
                             ))}
                         </CategoryText>
                 }
-                    
                 </ContentContainer>
             }
         </Container>

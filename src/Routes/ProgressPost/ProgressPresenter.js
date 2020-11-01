@@ -41,7 +41,6 @@ export default ({
     data, 
     loading, 
     open,
-    handleClickOpen,
     handleClose,
     handleAction,
     handleProgressApply,
@@ -141,6 +140,7 @@ export default ({
                             categorys={categorys}
                             userName={viewUser}
                             anotherPage={anotherPage}
+                            changeIdProgress="progress"
                         />
                     )}
                 </UserContainer>
@@ -148,8 +148,3 @@ export default ({
         );
     }
 };
-
-
-
-
-
