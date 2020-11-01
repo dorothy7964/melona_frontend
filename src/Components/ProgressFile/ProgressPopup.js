@@ -6,8 +6,7 @@ import CheckChangId from "./CheckChangId";
 import ProgressFileContainer from "./ProgressFileContainer";
 
 export default ({ 
-    changeId,
-    changeIdProgress = "none",
+    changeId = "none",
     categorys,
     userName,
     anotherPage,
@@ -24,19 +23,19 @@ export default ({
             >
                 <DialogTitle id="alert-dialog-title">진행 완료</DialogTitle>
                 <DialogContent>
-                    {changeIdProgress === "none" && anotherPage === false
-                        ?   categorys.map(category => (
+                    {changeId === "none" && anotherPage === true 
+                        ?    categorys.map(category => (
+                            <CheckChangId 
+                                key={category.id}
+                                categoryId={category.id}
+                                userName={userName}
+                                anotherPage={anotherPage}
+                            />
+                        ))
+                        :   categorys.map(category => (
                                 <ProgressFileContainer 
                                     key={category.id}
                                     changeId={changeId}
-                                    categoryId={category.id}
-                                    userName={userName}
-                                    anotherPage={anotherPage}
-                                />
-                            ))
-                        :    categorys.map(category => (
-                                <CheckChangId 
-                                    key={category.id}
                                     categoryId={category.id}
                                     userName={userName}
                                     anotherPage={anotherPage}

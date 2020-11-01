@@ -44,6 +44,7 @@ const ProgressFileBox = styled.div`
 export default ({ 
     data, 
     loading,
+    changeId,
     anotherPage,
     userName,
     open,
@@ -116,12 +117,13 @@ export default ({
                                         {contentsReqs.confirmProgress === 3 &&
                                             <ProgressFileBox>
                                                 <ButtonSquare 
-                                                    onClick={handleClickOpen}
+                                                    onClick={() => handleClickOpen(contentsReqs.id)}
                                                     text="인증 사진 보기"
                                                 />
                                                 <ProgressFile
                                                     open={open}
                                                     handleClose={handleClose}
+                                                    changeId={changeId}
                                                     categorys={[{
                                                         id : contents.category.id,
                                                         userName: userName,
@@ -129,7 +131,6 @@ export default ({
                                                     }]}
                                                     userName={userName}
                                                     anotherPage={anotherPage}
-                                                    changeId={contentsReqs.id}
                                                 />
                                             </ProgressFileBox>
                                         }

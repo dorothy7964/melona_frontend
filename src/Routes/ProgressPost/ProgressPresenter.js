@@ -140,7 +140,6 @@ export default ({
                             categorys={categorys}
                             userName={viewUser}
                             anotherPage={anotherPage}
-                            changeIdProgress="progress"
                         />
                     )}
                 </UserContainer>

@@ -17,6 +17,7 @@ export default ({ categoryId, userName, anotherPage }) => {
         setOpen(true);
         setChangeId(id);
     };
+    
     const handleClose = () => {
         setOpen(false);
     };
