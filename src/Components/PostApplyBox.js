@@ -8,10 +8,12 @@ import basic from "../Icons/melona_basic.png";
 import waiting from "../Icons/melona_waiting.png";
 import success from "../Icons/melona_success.png";
 import failure from "../Icons/melona_failure.png";
+import end from "../Icons/melona_end.png";
 import basicMe from "../Icons/req_basic.png";
 import waitingMe from "../Icons/req_waiting.png";
 import successMe from "../Icons/req_success.png";
 import failureMe from "../Icons/req_failure.png";
+import endMe from "../Icons/req_end.png";
 
 const Box = styled.div`
     position: relative;
@@ -58,8 +60,13 @@ const HoverText = styled.div`
     }
 `;
 
+const GreyText = styled.div`
+    color: ${props => props.theme.darkGreyColor};
+`;
+
 const PostApplyBox = ({
     anotherPage,
+    viewApply,
     isApply,
     isApplyWait,
     isApplyReadCheck,
@@ -92,15 +99,24 @@ const PostApplyBox = ({
 
     if (isApply === false && isApplyReadCheck === false) {
         return (
-            <Box>
-                <Link to={`/writeApply/${postId}`}>
-                    {!anotherPage
-                        ?   <img alt="default" src={basic} />
-                        :   <img alt="default" src={basicMe} />
-                    }
-                    <div>올 때 메로나</div>
-                </Link>
-            </Box>
+            viewApply 
+                ?   <Box>
+                        {!anotherPage
+                            ?   <img alt="default" src={end} />
+                            :   <img alt="default" src={endMe} />
+                        }
+                        <GreyText>신청 마감</GreyText>
+                    </Box>
+                :   <Box>
+                        <Link to={`/writeApply/${postId}`}>
+                            {!anotherPage
+                                ?   <img alt="default" src={basic} />
+                                :   <img alt="default" src={basicMe} />
+                            }
+                            <div>올 때 메로나</div>
+                        </Link>
+                    </Box>
+            
         );
     } else if (isApply === true && isApplyWait === true ) {
         return (

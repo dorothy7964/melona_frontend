@@ -94,6 +94,7 @@ export default ({
                     
                     :    <PostApplyBox 
                             anotherPage={anotherPage}
+                            viewApply={viewApply}
                             isApply={isApply}
                             isApplyWait={isApplyWait}
                             isApplyReadCheck={isApplyReadCheck}
