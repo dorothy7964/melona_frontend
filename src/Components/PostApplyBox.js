@@ -101,10 +101,6 @@ const PostApplyBox = ({
         return (
             viewApply 
                 ?   <Box>
-                        {!anotherPage
-                            ?   <img alt="default" src={end} />
-                            :   <img alt="default" src={endMe} />
-                        }
                         <GreyText>신청 마감</GreyText>
                     </Box>
                 :   <Box>
