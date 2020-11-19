@@ -6,8 +6,14 @@ import { ThemeProvider } from "@material-ui/styles";
 import TextField from '@material-ui/core/TextField';
 
 const defaultMaterialTheme = createMuiTheme({
+    '& label.Mui-focused': {
+        color: lightGreen
+    },
     palette: {
         primary: lightGreen,
+    },
+    label: {
+        color: "blue"
     },
     fontSize:"20px"
 });
