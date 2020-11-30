@@ -65,6 +65,10 @@ const UserColumnMd = styled.div`
     }
 `;
 
+const ApplyText = styled.div`
+    min-width: 50px;
+`;
+
 const Groups = styled.div`
     @media (max-width: 622px){
         display: none;
@@ -120,7 +124,9 @@ const UserCard = ({
             </UserColumn>
             <UserColumnMd>
                 <User />
-                <FatText text={`${applysCount} 명`} />
+                <ApplyText>
+                    <FatText text={`${applysCount} 명`} />
+                </ApplyText>
                 <Groups>
                     <AvatarGroups applys={applys} />
                 </Groups>
