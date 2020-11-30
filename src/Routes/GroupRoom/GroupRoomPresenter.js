@@ -230,7 +230,6 @@ export default ({
                                     <FatText text={seeGroupRoom.founderUser.userName} />
                                 </TextBox>
                             </CoverBox>
-
                             {seeGroupRoom.founderUser.userName === userName 
                                 ?   <ThemeProvider theme={defaultMaterialTheme}>
                                         <DialogBox>

@@ -5,7 +5,16 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { lightGreen } from '@material-ui/core/colors';
+import { ThemeProvider } from "@material-ui/styles";
 import TextFields from "./TextFields";
+
+const defaultMaterialTheme  = createMuiTheme({
+    palette: {
+        primary: lightGreen,
+    }
+});
 
 export default ({ 
     roomName ,
@@ -16,7 +25,7 @@ export default ({
     handleClose,
     handleEdit
 }) => (
-    <React.Fragment>
+    <ThemeProvider theme={defaultMaterialTheme}>
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
             그룹 이름 편집
         </Button>
@@ -44,5 +53,5 @@ export default ({
                 </Button>
             </DialogActions>
         </Dialog>
-    </React.Fragment>
+    </ThemeProvider>
 );

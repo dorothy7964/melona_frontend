@@ -5,8 +5,17 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { lightGreen } from '@material-ui/core/colors';
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from '@material-ui/core/styles';
 import TransferList from "./TransferList";
 import { ADDMEMBER_LIST } from "../SharedQueries";
+
+const defaultMaterialTheme  = createMuiTheme({
+    palette: {
+        primary: lightGreen,
+    }
+});
 
 export default ({ 
     userNameArr,
@@ -34,7 +43,7 @@ export default ({
         const { addMemberList } = data;
         
         return (
-            <React.Fragment>
+            <ThemeProvider theme={defaultMaterialTheme}>
                 <Button variant="outlined" color="primary" onClick={handleClickOpenMember}>
                     그룹 인원 추가
                 </Button>
@@ -61,7 +70,7 @@ export default ({
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </React.Fragment>
+            </ThemeProvider>
         );
     }
 };
