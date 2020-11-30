@@ -1,10 +1,25 @@
 import React from 'react';
+import styled from "styled-components";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TransferList from "./TransferList";
+import { red, grey } from '@material-ui/core/colors';
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from '@material-ui/core/styles';
+
+const defaultMaterialTheme  = createMuiTheme({
+    palette: {
+        primary: red,
+        secondary: grey
+    }
+});
+
+const GreyText  = styled.span`
+    color: ${props => props.theme.darkGreyColor};
+`;
 
 export default ({ 
     userNameArr,
@@ -16,8 +31,8 @@ export default ({
     handleCloseMember,
     handleAddMember,
 }) => (
-    <React.Fragment>
-        <Button variant="outlined" color="secondary" onClick={handleClickOpenMember}>
+    <ThemeProvider theme={defaultMaterialTheme}>
+        <Button variant="outlined" color="primary" onClick={handleClickOpenMember}>
             그룹 인원 삭제
         </Button>
         <Dialog open={memberOpen} onClose={handleCloseMember} aria-labelledby="form-dialog-title">
@@ -33,16 +48,16 @@ export default ({
             />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCloseMember} color="primary">
-                    취소 하기
+                <Button onClick={handleCloseMember} color="secondary">
+                    <GreyText>취소 하기</GreyText>
                 </Button>
                 <Button 
                     onClick={() => handleAddMember(groupMemberId)} 
-                    color="secondary"
+                    color="primary"
                 >
                     삭제 하기
                 </Button>
             </DialogActions>
         </Dialog>
-    </React.Fragment>
+    </ThemeProvider>
 );

@@ -1,11 +1,12 @@
 import React from 'react';
+import styled from "styled-components";
 import { useQuery } from 'react-apollo-hooks';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { lightGreen } from '@material-ui/core/colors';
+import { lightGreen, grey } from '@material-ui/core/colors';
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from '@material-ui/core/styles';
 import TransferList from "./TransferList";
@@ -14,8 +15,13 @@ import { ADDMEMBER_LIST } from "../SharedQueries";
 const defaultMaterialTheme  = createMuiTheme({
     palette: {
         primary: lightGreen,
+        secondary: grey
     }
 });
+
+const GreyText  = styled.span`
+    color: ${props => props.theme.darkGreyColor};
+`;
 
 export default ({ 
     userNameArr,
@@ -59,8 +65,8 @@ export default ({
                     />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleCloseMember} color="primary">
-                            취소 하기
+                        <Button onClick={handleCloseMember} color="secondary">
+                            <GreyText>취소 하기</GreyText>
                         </Button>
                         <Button 
                             onClick={() => handleAddMember(groupMemberId)} 
