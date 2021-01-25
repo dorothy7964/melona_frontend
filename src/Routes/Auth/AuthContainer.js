@@ -13,8 +13,8 @@ import {
 export default () => {
     const [action, setAction] = useState("logIn");
     const userName = useInput("");
-    const email = useInput("");
-    const password = useInput("");
+    const email = useInput("wam6577@gmail.com");
+    const password = useInput("1234");
     const confirmPw = useInput("");
     const [localLogInMutation] = useMutation(LOCAL_LOG_IN);
     const [confirmPasswordMutation] = useMutation(LOG_IN, {
