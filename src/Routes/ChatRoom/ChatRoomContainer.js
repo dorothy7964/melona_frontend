@@ -142,7 +142,7 @@ export default ({
     if (!loading) {
       scrollBottom();
     }
-  }, [data]);
+  }, [data, loading]);
 
   return (
     <ChatRoomPresenter
