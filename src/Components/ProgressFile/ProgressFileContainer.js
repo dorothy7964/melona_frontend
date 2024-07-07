@@ -62,8 +62,8 @@ export default ({ changeId, categoryId, userName, anotherPage }) => {
     variables: {
       categoryId,
       userName,
-      anotherPage
-    }
+      anotherPage,
+    },
   });
 
   useEffect(() => {
@@ -130,7 +130,7 @@ export default ({ changeId, categoryId, userName, anotherPage }) => {
                     </Wrapper>
                   )}
                 </ConfirmFileBox>
-              )
+              ),
           )
         )}
       </div>

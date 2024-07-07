@@ -7,11 +7,11 @@ import { ME } from "../../SharedQueries";
 export default ({ categoryId, anotherPage }) => {
   const {
     data: {
-      me: { userName }
-    }
+      me: { userName },
+    },
   } = useQuery(ME);
   const { data, loading, refetch } = useQuery(CATEGORY_CONTENTSSELF, {
-    variables: { categoryId, anotherPage }
+    variables: { categoryId, anotherPage },
   });
 
   const [changeId, setChangeId] = useState("");

@@ -5,14 +5,14 @@ import { ME, SEEBUYME_GROUP } from "../../SharedQueries";
 
 export default ({
   match: {
-    params: { groupRoomId }
-  }
+    params: { groupRoomId },
+  },
 }) => {
   const [tab, setTab] = useState("req");
   const { refetch } = useQuery(SEEBUYME_GROUP, {
     variables: {
-      groupRoomId
-    }
+      groupRoomId,
+    },
   });
   const { data, loading } = useQuery(ME);
 

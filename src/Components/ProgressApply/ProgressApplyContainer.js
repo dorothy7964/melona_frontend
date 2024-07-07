@@ -5,7 +5,7 @@ import { CATEGORY_CONTENTS } from "./ProgressApplyQueries";
 
 export default ({ categoryId, userName, anotherPage }) => {
   const { data, loading, refetch } = useQuery(CATEGORY_CONTENTS, {
-    variables: { categoryId, userName, anotherPage }
+    variables: { categoryId, userName, anotherPage },
   });
 
   const [changeId, setChangeId] = useState("");

@@ -7,13 +7,13 @@ import {
   SEE_GROUPROOM,
   EDIT_GROUPROOM,
   ADD_MEMBER,
-  DELETE_MEMBER
+  DELETE_MEMBER,
 } from "./GroupRoomQueries";
 
 export default ({
   match: {
-    params: { groupRoomId }
-  }
+    params: { groupRoomId },
+  },
 }) => {
   const [fileLoading, setFileLoading] = useState(false);
   const [addUserMemberMutation] = useMutation(ADD_MEMBER);
@@ -22,12 +22,12 @@ export default ({
     refetchQueries: () => [
       {
         query: SEE_GROUPROOM,
-        variables: { groupRoomId }
-      }
-    ]
+        variables: { groupRoomId },
+      },
+    ],
   });
   const { data, loading, refetch } = useQuery(SEE_GROUPROOM, {
-    variables: { groupRoomId }
+    variables: { groupRoomId },
   });
 
   // 진행 상황 보기
@@ -62,8 +62,8 @@ export default ({
     await editGroupRoomMutation({
       variables: {
         groupRoomId,
-        roomName: inputText
-      }
+        roomName: inputText,
+      },
     });
     toast.success(`그룹 이름: ${inputText} / 변경 되었습니다.`);
     setInput("");
@@ -87,8 +87,8 @@ export default ({
     await addUserMemberMutation({
       variables: {
         groupMemberId,
-        userNameArr: right
-      }
+        userNameArr: right,
+      },
     });
     toast.success("멤버가 추가 되었습니다.");
     setRight([]);
@@ -112,8 +112,8 @@ export default ({
     await deleteUserMemberMutation({
       variables: {
         groupMemberId,
-        userNameArr: rightDel
-      }
+        userNameArr: rightDel,
+      },
     });
     toast.success("멤버가 삭제 되었습니다.");
     setRightDel([]);
@@ -134,20 +134,20 @@ export default ({
     try {
       setFileLoading(true);
       const {
-        data: { location }
+        data: { location },
       } = await axios.post(`${url}/api/upload`, formData, {
         headers: {
           "content-type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*"
-        }
+          "Access-Control-Allow-Origin": "*",
+        },
       });
       const {
-        data: { editGroupRoom }
+        data: { editGroupRoom },
       } = await editGroupRoomMutation({
         variables: {
           groupRoomId,
-          coverPhoto: location
-        }
+          coverPhoto: location,
+        },
       });
       if (editGroupRoom) {
         toast.success("커버 사진이 변경 되었습니다.");

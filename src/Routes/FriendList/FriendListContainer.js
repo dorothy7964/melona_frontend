@@ -15,15 +15,15 @@ export default () => {
       if (isFollowing === true) {
         await toggleFollowMutation({
           variables: {
-            userName
-          }
+            userName,
+          },
         });
         toast.success(`${userName} 님과 친구 연결이 해제 되었습니다.`);
       } else {
         await toggleFollowMutation({
           variables: {
-            userName
-          }
+            userName,
+          },
         });
         toast.success(`${userName} 님과 친구 연결이 되었습니다.`);
       }

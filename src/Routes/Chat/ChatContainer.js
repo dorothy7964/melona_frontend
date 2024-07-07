@@ -6,7 +6,7 @@ import {
   CHATROOMS_QUERY,
   READCOUNT_MESSAGE,
   CREATE_CHATROOM,
-  DELETE_CHATROOM
+  DELETE_CHATROOM,
 } from "./ChatQueries";
 
 export default ({ history }) => {
@@ -23,16 +23,16 @@ export default ({ history }) => {
   const handleCreateRoom = async (userName) => {
     try {
       const {
-        data: { createChatRoom }
+        data: { createChatRoom },
       } = await createChatRoomMutaion({
         refetchQueries: () => [
           {
-            query: CHATROOMS_QUERY
-          }
+            query: CHATROOMS_QUERY,
+          },
         ],
         variables: {
-          userName
-        }
+          userName,
+        },
       });
       history.push(`/chat/${createChatRoom.id}`);
     } catch (e) {
@@ -45,12 +45,12 @@ export default ({ history }) => {
       await deleteChatRoomMutaion({
         refetchQueries: () => [
           {
-            query: CHATROOMS_QUERY
-          }
+            query: CHATROOMS_QUERY,
+          },
         ],
         variables: {
-          chatRoomId
-        }
+          chatRoomId,
+        },
       });
     } catch (e) {
       console.log(e);
@@ -62,12 +62,12 @@ export default ({ history }) => {
       const { data } = await readcountMsgMutation({
         refetchQueries: () => [
           {
-            query: CHATROOMS_QUERY
-          }
+            query: CHATROOMS_QUERY,
+          },
         ],
         variables: {
-          chatRoomId
-        }
+          chatRoomId,
+        },
       });
       if (data.readcountMessage) {
         history.push(`/chat/${chatRoomId}`);

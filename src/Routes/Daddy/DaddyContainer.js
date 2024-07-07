@@ -9,16 +9,16 @@ export default () => {
   const { data, refetch, fetchMore } = useQuery(SEE_BUY, {
     variables: {
       pageNumber: 0,
-      items
+      items,
     },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
 
   const onLoadMore = () => {
     fetchMore({
       variables: {
         pageNumber: data.seeBuy.length,
-        items
+        items,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
@@ -29,9 +29,9 @@ export default () => {
           setHasMore(false);
         }
         return Object.assign({}, prev, {
-          seeBuy: [...prev.seeBuy, ...fetchMoreResult.seeBuy]
+          seeBuy: [...prev.seeBuy, ...fetchMoreResult.seeBuy],
         });
-      }
+      },
     });
   };
 

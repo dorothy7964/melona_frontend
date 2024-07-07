@@ -9,37 +9,37 @@ const Animation = keyframes`
 `;
 
 const Loader = styled.div`
-    animation: ${Animation} 1s linear infinite;
-    width: 100%;
-    text-align: center;
-    img {
-        width: 50px;
-    }
+  animation: ${Animation} 1s linear infinite;
+  width: 100%;
+  text-align: center;
+  img {
+    width: 50px;
+  }
 `;
 
 const LoaderSmall = styled.div`
-    animation: ${Animation} 1s linear infinite;
-    width: 100%;
-    text-align: center;
-    img {
-        width: 20px;
-    }
+  animation: ${Animation} 1s linear infinite;
+  width: 100%;
+  text-align: center;
+  img {
+    width: 20px;
+  }
 `;
 
 export default ({ type = "default" }) => {
-    const [action] = useState(type);
+  const [action] = useState(type);
 
-    if (action === "default"){
-        return (
-            <Loader>
-                <img alt="loading" src={melonaColor} />
-            </Loader>
-        );
-    } else if (action === "small") {
-        return (
-            <LoaderSmall>
-                <img alt="loading" src={melonaColor} />
-            </LoaderSmall>
-        );
-    }
+  if (action === "default") {
+    return (
+      <Loader>
+        <img alt="loading" src={melonaColor} />
+      </Loader>
+    );
+  } else if (action === "small") {
+    return (
+      <LoaderSmall>
+        <img alt="loading" src={melonaColor} />
+      </LoaderSmall>
+    );
+  }
 };

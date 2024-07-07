@@ -8,8 +8,8 @@ import { CREATE_GROUPROOM, SEE_FOLLOWING } from "./AddRoomQueries";
 export default ({
   history,
   match: {
-    params: { userName }
-  }
+    params: { userName },
+  },
 }) => {
   const [createGroupRoomMutation] = useMutation(CREATE_GROUPROOM);
   // 친구 목록 데이터
@@ -19,7 +19,7 @@ export default ({
   // 그룹 이름
   const [roomName, setRoomName] = useState("");
   const [coverPhoto, setCoverPhoto] = useState(
-    "https://pbs.twimg.com/profile_images/926440213475246080/BkBTGG8b_400x400.jpg"
+    "https://pbs.twimg.com/profile_images/926440213475246080/BkBTGG8b_400x400.jpg",
   );
 
   const handleChangeRoomName = (e) => {
@@ -38,12 +38,12 @@ export default ({
     formData.append("file", file);
     try {
       const {
-        data: { location }
+        data: { location },
       } = await axios.post(`${url}/api/upload`, formData, {
         headers: {
           "content-type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*"
-        }
+          "Access-Control-Allow-Origin": "*",
+        },
       });
       setCoverPhoto(location);
     } catch (e) {
@@ -62,8 +62,8 @@ export default ({
         variables: {
           coverPhoto,
           roomName,
-          userName: right
-        }
+          userName: right,
+        },
       });
     } catch (e) {
       toast.error("업로드 실패하였습니다.");

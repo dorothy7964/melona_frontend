@@ -7,18 +7,18 @@ import {
   GET_USER,
   EDIT_USER,
   EDIT_PASSWORD,
-  EDIT_AVATAR
+  EDIT_AVATAR,
 } from "./EditProfileQueries";
 
 export default ({
   history,
   match: {
-    params: { userName }
-  }
+    params: { userName },
+  },
 }) => {
   const [fileLoading, setFileLoading] = useState(false);
   const { data, loading, refetch } = useQuery(GET_USER, {
-    variables: { userName }
+    variables: { userName },
   });
   const [editUserMutation] = useMutation(EDIT_USER);
   const [editPasswordMutation] = useMutation(EDIT_PASSWORD);
@@ -26,9 +26,9 @@ export default ({
     refetchQueries: () => [
       {
         query: GET_USER,
-        variables: { userName }
-      }
-    ]
+        variables: { userName },
+      },
+    ],
   });
 
   const handleConfirm = async (userName, email, password, passwordConfirm) => {
@@ -38,8 +38,8 @@ export default ({
           try {
             await editPasswordMutation({
               variables: {
-                password
-              }
+                password,
+              },
             });
           } catch (e) {
             return toast.error("비밀번호가 변경되지 않습니다.");
@@ -49,12 +49,12 @@ export default ({
         return toast.error("비밀번호가 변경되지 않습니다.");
       }
       const {
-        data: { editUser }
+        data: { editUser },
       } = await editUserMutation({
         variables: {
           userName,
-          email
-        }
+          email,
+        },
       });
       if (!editUser) {
         toast.error("프로필 편집 되지 않았습니다.");
@@ -92,19 +92,19 @@ export default ({
     try {
       setFileLoading(true);
       const {
-        data: { location }
+        data: { location },
       } = await axios.post(`${url}/api/upload`, formData, {
         headers: {
           "content-type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*"
-        }
+          "Access-Control-Allow-Origin": "*",
+        },
       });
       const {
-        data: { editAvatar }
+        data: { editAvatar },
       } = await editAvatarMutaion({
         variables: {
-          avatar: location
-        }
+          avatar: location,
+        },
       });
       if (editAvatar) {
         toast.success("업로드 되었습니다.");

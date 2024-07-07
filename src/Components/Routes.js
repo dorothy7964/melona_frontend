@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Auth from "../Routes/Auth";
 // import Feed from "../Routes/Feed";
@@ -32,53 +32,58 @@ import EditProfile from "../Routes/EditProfile";
 import Profile from "../Routes/Profile";
 
 const LoggedInRoutes = () => (
-    <Switch>
-        <Route exact path="/" component={Daddy} />
-        <Route path="/daddy" component={Daddy} />
-        <Route path="/daughter" component={Daughter} />
-        <Route path="/search/:term" component={Search} />
-        <Route path="/searchGroup/:groupRoomId/:term" component={SearchGroup} />
-        <Route path="/searchMe/:term" component={SearchMe} />
-        <Route path="/searchMeGroup/:groupRoomId/:term" component={SearchMeGroup} />
-        <Route path="/viewApply/:postId" component={ViewApply} />
-        <Route path="/writeApply/:postId" component={WriteApply} />
-        <Route path="/writeRecruit" component={WriteRecruit} />
-        <Route path="/writeRecruitGroup/:groupRoomId" component={WriteRecruitGroup} />
-        <Route path="/writeRecruitMe" component={WriteRecruitMe} />
-        <Route path="/writeRecruitMeGroup/:groupRoomId" component={WriteRecruitMeGroup} />
-        <Route path="/writeRecruit/:address" component={WriteRecruit} />
-        <Route path="/progressStap/:postId" component={ProgressStap} />
-        <Route path="/progress/:postId" component={ProgressPost} />
-        <Route path="/comment/:postId" component={Comment} />
-        <Route path="/buy" component={Buy} />
-        <Route path="/buyGroup/:groupRoomId" component={BuyGroup} />
-        <Route path="/apply" component={Apply} />
-        <Route path="/applyGroup/:groupRoomId" component={ApplyGroup} />
-        <Route path="/chat/:chatRoomId" component={ChatRoom} />
-        <Route path="/chat" component={Chat} />
-        <Route path="/friendList" component={FriendList} />
-        <Route path="/groupRoom/:groupRoomId" component={GroupRoom} />
-        <Route path="/groupRoomMe/:groupRoomId" component={GroupRoomMe} />
-        <Route path="/addGroupRoom/:userName" component={AddGroupRoom} />
-        <Route path="/editProfile/:userName" component={EditProfile} />
-        <Route path="/:userName" component={Profile} />
-        <Redirect from="*" to="/" />
-    </Switch>
+  <Switch>
+    <Route exact path="/" component={Daddy} />
+    <Route path="/daddy" component={Daddy} />
+    <Route path="/daughter" component={Daughter} />
+    <Route path="/search/:term" component={Search} />
+    <Route path="/searchGroup/:groupRoomId/:term" component={SearchGroup} />
+    <Route path="/searchMe/:term" component={SearchMe} />
+    <Route path="/searchMeGroup/:groupRoomId/:term" component={SearchMeGroup} />
+    <Route path="/viewApply/:postId" component={ViewApply} />
+    <Route path="/writeApply/:postId" component={WriteApply} />
+    <Route path="/writeRecruit" component={WriteRecruit} />
+    <Route
+      path="/writeRecruitGroup/:groupRoomId"
+      component={WriteRecruitGroup}
+    />
+    <Route path="/writeRecruitMe" component={WriteRecruitMe} />
+    <Route
+      path="/writeRecruitMeGroup/:groupRoomId"
+      component={WriteRecruitMeGroup}
+    />
+    <Route path="/writeRecruit/:address" component={WriteRecruit} />
+    <Route path="/progressStap/:postId" component={ProgressStap} />
+    <Route path="/progress/:postId" component={ProgressPost} />
+    <Route path="/comment/:postId" component={Comment} />
+    <Route path="/buy" component={Buy} />
+    <Route path="/buyGroup/:groupRoomId" component={BuyGroup} />
+    <Route path="/apply" component={Apply} />
+    <Route path="/applyGroup/:groupRoomId" component={ApplyGroup} />
+    <Route path="/chat/:chatRoomId" component={ChatRoom} />
+    <Route path="/chat" component={Chat} />
+    <Route path="/friendList" component={FriendList} />
+    <Route path="/groupRoom/:groupRoomId" component={GroupRoom} />
+    <Route path="/groupRoomMe/:groupRoomId" component={GroupRoomMe} />
+    <Route path="/addGroupRoom/:userName" component={AddGroupRoom} />
+    <Route path="/editProfile/:userName" component={EditProfile} />
+    <Route path="/:userName" component={Profile} />
+    <Redirect from="*" to="/" />
+  </Switch>
 );
 
 const LoggedOutRoutes = () => (
-    <Switch>
-        <Route exact path="/" component={Auth} />
-        <Redirect from="*" to="/" />
-    </Switch>
+  <Switch>
+    <Route exact path="/" component={Auth} />
+    <Redirect from="*" to="/" />
+  </Switch>
 );
 
-const Routes = ({ isLoggedIn }) => 
-    isLoggedIn? <LoggedInRoutes /> : <LoggedOutRoutes />;
-
+const Routes = ({ isLoggedIn }) =>
+  isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />;
 
 Routes.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export default Routes;

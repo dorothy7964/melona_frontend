@@ -10,16 +10,16 @@ export default ({ groupRoomId }) => {
     variables: {
       groupRoomId,
       pageNumber: 0,
-      items
+      items,
     },
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
 
   const onLoadMore = () => {
     fetchMore({
       variables: {
         pageNumber: data.seeBuyGroup.length,
-        items
+        items,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
@@ -30,9 +30,9 @@ export default ({ groupRoomId }) => {
           setHasMore(false);
         }
         return Object.assign({}, prev, {
-          seeBuyGroup: [...prev.seeBuyGroup, ...fetchMoreResult.seeBuyGroup]
+          seeBuyGroup: [...prev.seeBuyGroup, ...fetchMoreResult.seeBuyGroup],
         });
-      }
+      },
     });
   };
 
