@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Avatar from "./Avatar";
@@ -106,7 +106,7 @@ const ChatCard = ({
   const avatar = participants[0].avatar;
   const userName = participants[0].userName;
 
-  const more = () =>
+  const more = useCallback(() => {
     subscribeToMore({
       document: NEW_MESSAGE,
       variables: {
@@ -116,10 +116,11 @@ const ChatCard = ({
         refetch();
       },
     });
+  }, [chatRoomId, refetch, subscribeToMore]);
 
   useEffect(() => {
     more();
-  }, []);
+  }, [more]);
 
   return (
     <Card>

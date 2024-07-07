@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from "@apollo/client";
 import {
@@ -54,8 +54,8 @@ export default ({
       chatRoomId,
     },
   });
-  const more = () =>
-    subscribeToMore({
+  const more = useCallback(() => {
+    return subscribeToMore({
       document: NEW_MESSAGE,
       variables: {
         chatRoomId,
@@ -77,6 +77,7 @@ export default ({
         }
       },
     });
+  }, [chatRoomId, subscribeToMore, readcountMsgMutation]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -136,7 +137,7 @@ export default ({
 
   useEffect(() => {
     more();
-  }, []);
+  }, [more]);
 
   useEffect(() => {
     if (!loading) {
