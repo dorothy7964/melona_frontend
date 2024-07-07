@@ -4,38 +4,38 @@ import ProgressApplyPresenter from "./ProgressApplyPresenter";
 import { CATEGORY_CONTENTS } from "./ProgressApplyQueries";
 
 export default ({ categoryId, userName, anotherPage }) => {
-    const { data, loading, refetch } = useQuery(CATEGORY_CONTENTS, {
-        variables: { categoryId, userName, anotherPage }
-    });
+  const { data, loading, refetch } = useQuery(CATEGORY_CONTENTS, {
+    variables: { categoryId, userName, anotherPage }
+  });
 
-    const [changeId, setChangeId] = useState("");
+  const [changeId, setChangeId] = useState("");
 
-    // 진행완료 팝업
-    const [open, setOpen] = useState(false);
+  // 진행완료 팝업
+  const [open, setOpen] = useState(false);
 
-    const handleClickOpen = (id) => {
-        setOpen(true);
-        setChangeId(id);
-    };
-    
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClickOpen = (id) => {
+    setOpen(true);
+    setChangeId(id);
+  };
 
-    useEffect(() => {
-        refetch();
-    }, []);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    return (
-        <ProgressApplyPresenter
-            data={data}
-            loading={loading}
-            changeId={changeId}
-            userName={userName}
-            anotherPage={anotherPage}
-            open={open}
-            handleClickOpen={handleClickOpen}
-            handleClose={handleClose}
-        />
-    );
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  return (
+    <ProgressApplyPresenter
+      data={data}
+      loading={loading}
+      changeId={changeId}
+      userName={userName}
+      anotherPage={anotherPage}
+      open={open}
+      handleClickOpen={handleClickOpen}
+      handleClose={handleClose}
+    />
+  );
 };

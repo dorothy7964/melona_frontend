@@ -5,46 +5,46 @@ import { items } from "../../PaginationItemNum";
 import DaddyPresenter from "./DaddyPresenter";
 
 export default () => {
-    const [hasMore, setHasMore] = useState(true);
-    const { data, refetch, fetchMore } = useQuery(SEE_BUY, {
-        variables: {
-            pageNumber: 0,
-            items
-        },
-        fetchPolicy: "cache-and-network"
-    });
-    
-    const onLoadMore = () => {
-        fetchMore({
-            variables: {
-                pageNumber: data.seeBuy.length,
-                items
-            },
-            updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) {
-                    setHasMore(false);
-                    return prev;
-                }
-                if (fetchMoreResult.seeBuy.length < items) {
-                    setHasMore(false);
-                }
-                return Object.assign({}, prev, {
-                    seeBuy: [...prev.seeBuy, ...fetchMoreResult.seeBuy]
-                });
-            }
-        })
-    }
+  const [hasMore, setHasMore] = useState(true);
+  const { data, refetch, fetchMore } = useQuery(SEE_BUY, {
+    variables: {
+      pageNumber: 0,
+      items
+    },
+    fetchPolicy: "cache-and-network"
+  });
 
-    useEffect(() => {
-        refetch();
-    }, []);
- 
-    return (
-        <DaddyPresenter 
-            data={data}
-            hasMore={hasMore}
-            onLoadMore={onLoadMore}
-            refetch={refetch}
-        />
-    );
+  const onLoadMore = () => {
+    fetchMore({
+      variables: {
+        pageNumber: data.seeBuy.length,
+        items
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) {
+          setHasMore(false);
+          return prev;
+        }
+        if (fetchMoreResult.seeBuy.length < items) {
+          setHasMore(false);
+        }
+        return Object.assign({}, prev, {
+          seeBuy: [...prev.seeBuy, ...fetchMoreResult.seeBuy]
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  return (
+    <DaddyPresenter
+      data={data}
+      hasMore={hasMore}
+      onLoadMore={onLoadMore}
+      refetch={refetch}
+    />
+  );
 };
